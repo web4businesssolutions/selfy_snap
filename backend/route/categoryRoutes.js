@@ -17,13 +17,14 @@ const {
     getAllCategories,
     updateCategory,
     deleteCategory,
-} = require("../controller/categoryController"); // use correct path
+} = require("../controller/categoryController");
+const upload = require('../middleware/upload'); // use correct path
 
 const router = express.Router();
 
-router.post("/create", createCategory);
+router.post("/create", upload.single("image"), createCategory);
 router.get("/all", getAllCategories);
-router.put("/update/:id", updateCategory);
+router.put("/update/:id", upload.single("image"), updateCategory);
 router.delete("/delete/:id", deleteCategory);
 
 module.exports = router; // ✅ important

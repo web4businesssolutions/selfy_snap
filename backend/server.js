@@ -13,13 +13,16 @@ const orderRoutes = require('./route/order');
 const adminRoutes = require('./route/admin');
 const categoryRoutes = require("./route/categoryRoutes");
 const uploadRoutes = require('./route/upload')
+const productDetailRoutes = require('./route/productDetailRoute')
+const userRoutes = require('./route/userRoute');
 
 
 const app = express();
 
 // ✅ Enable CORS for frontend origin
 app.use(cors({
-    origin: 'https://selfy-snap-1.onrender.com',
+    // origin: 'https://selfy-snap-1.onrender.com',
+    origin: 'http://localhost:5173',
 
     credentials: true,
 }));
@@ -48,6 +51,8 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/productdetail', productDetailRoutes);
+app.use('/api/users', userRoutes);
 
 
 const PORT = process.env.PORT || 4000;

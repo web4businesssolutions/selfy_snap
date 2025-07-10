@@ -7,6 +7,9 @@ import Product from './Product';
 import User from './User';
 import Order from './Order';
 import Category from './Category';
+import StepperForm from './StepperProduct';
+import UpdateStepperForm from './UpdateStepperProduct';
+import UserPage from './UserPage';
 
 const Main = () => {
     return (
@@ -27,6 +30,9 @@ const Main = () => {
                         <Route path="product" element={<Product />} />
                         <Route path="user" element={<User />} />
                         <Route path="order" element={<Order />} />
+                        <Route path="vendor" element={<UserPage />} />
+                        <Route path="stepper-product" element={<StepperForm />} />
+                        <Route path="stepper-product/:id" element={<UpdateStepperForm />} />
                     </Routes>
                 </main>
             </div>

@@ -35,7 +35,7 @@ const PublicLayout = ({ children }) => {
   return (
     <>
       {!hideLayout && <Header />}
-      <div className="mt-6 min-h-[80vh]">{children}</div>
+      <div className="min-h-[80vh]">{children}</div>
       {!hideLayout && <Footer />}
     </>
   );

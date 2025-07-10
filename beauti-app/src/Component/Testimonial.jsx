@@ -1,78 +1,143 @@
-import React, { useState } from 'react';
+import React from "react";
+import Slider from "react-slick";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const testimonials = [
-    {
-        quote: `Manpreet Singh is the visionary CEO behind [Selfy Snap], a leader in delivering innovative and high-quality beauty products that empower customers to feel confident and radiant. With a deep passion for skincare and cosmetics, Manpreet has driven the company’s mission to blend science and nature, creating products that cater to diverse beauty needs worldwide. Under his leadership, the brand has grown rapidly by prioritizing customer satisfaction, sustainability, and cutting-edge formulation. Manpreet believes in fostering a culture of creativity and excellence, inspiring his team to continuously innovate and elevate the beauty experience for every customer.`,
-        author: 'Manpreet Singh',
-        position: 'CEO ',
-        image: 'images/logo/images.png',
-    },
-    {
-        quote: `Manpreet Singh is a dedicated and dynamic manager at [Selfy snap], known for his exceptional leadership and commitment to driving team success. With a strong passion for the beauty industry, Manpreet plays a crucial role in ensuring smooth operations and delivering top-quality products that empower customers to feel confident and radiant. He fosters a collaborative and motivated work environment, encouraging innovation and excellence within his team. Manpreet’s focus on customer satisfaction and sustainable practices helps the company continuously evolve and meet diverse beauty needs worldwide.`,
-        author: 'Manpreet Singh',
-        position: ' Manager.',
-        image: 'images/logo/images.png',
-    },
-
+  {
+    quote: "Selfy Snap's natural skincare range has changed my routine completely. I finally feel confident in my own skin!",
+    author: "Aarohi Verma",
+    position: "Customer from Mumbai",
+    image: "/images/girl.png",
+  },
+  {
+    quote: "I’ve tried dozens of products, but nothing matches the quality and results of Selfy Snap. Highly recommended!",
+    author: "Ravi Sharma",
+    position: "Customer from Delhi",
+    image: "/images/boy.png",
+  },
+  {
+    quote: "Their dedication to sustainability is what I love most. I feel good about what I’m putting on my skin.",
+    author: "Meera Iyer",
+    position: "Customer from Bengaluru",
+    image: "/images/girl.png",
+  },
+  {
+    quote: "Fast delivery, premium packaging, and amazing results. I gifted their combo to my sister — she loved it!",
+    author: "Ankit Thakur",
+    position: "Customer from Chandigarh",
+    image: "/images/boy.png",
+  },
+  {
+    quote: "Selfy Snap’s herbal products have a lovely texture and fragrance. They truly care about quality.",
+    author: "Pooja Desai",
+    position: "Customer from Ahmedabad",
+    image: "/images/girl.png",
+  },
 ];
 
 const Testimonial = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+  const settings = {
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    speed: 700,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    prevArrow: (
+      <div className="slick-prev-custom">
+        <ChevronLeft size={28} />
+      </div>
+    ),
+    nextArrow: (
+      <div className="slick-next-custom">
+        <ChevronRight size={28} />
+      </div>
+    ),
+  };
 
-    const prevSlide = () => {
-        setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-    };
-
-    const nextSlide = () => {
-        setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-    };
-
-    const { quote, author, position, image } = testimonials[currentIndex];
-
-    return (
-        <div className="testimonial-section py-12 bg-gray-50">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-10">
-                    <h2 className="text-3xl font-bold">Testimonials</h2>
-                </div>
-
-                <div className="relative max-w-3xl mx-auto bg-white p-8 shadow-lg rounded-md text-center">
-                    <blockquote className="mb-6 text-gray-700 italic">
-                        <p>&ldquo;{quote}&rdquo;</p>
-                    </blockquote>
-
-                    <div className="flex justify-center mb-4">
-                        <img
-                            src={image}
-                            alt={author}
-                            className="w-20 h-20 rounded-full object-cover border-2 border-gray-300"
-                        />
-                    </div>
-
-                    <h3 className="text-lg font-semibold">{author}</h3>
-                    <span className="text-sm text-gray-500">{position}</span>
-
-                    {/* Navigation Arrows */}
-                    <div className="absolute top-1/2 left-0 transform -translate-y-1/2">
-                        <button
-                            onClick={prevSlide}
-                            className="text-gray-600 hover:text-gray-900 px-4"
-                        >
-                            <i className="fa fa-chevron-left"></i>
-                        </button>
-                    </div>
-                    <div className="absolute top-1/2 right-0 transform -translate-y-1/2">
-                        <button
-                            onClick={nextSlide}
-                            className="text-gray-600 hover:text-gray-900 px-4"
-                        >
-                            <i className="fa fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+  return (
+    <section className="bg-gray-50 py-16 px-4">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+        {/* Left Static Banner */}
+        <div className="w-full h-96 rounded-xl overflow-hidden shadow-lg">
+          <img
+            src="/images/image/makeup3.jpeg"
+            alt="testimonial banner"
+            className="w-full h-full object-cover"
+          />
         </div>
-    );
+
+        {/* Right Carousel */}
+        <div>
+          <h2 className="text-2xl font-extrabold mb-10 text-center text-gray-800">
+                <span className="inline-block border-b-4 border-blue-500 rounded pb-2 mb-10">
+                    What Our Client Says
+                </span>
+            </h2>
+
+          <Slider {...settings}>
+            {testimonials.map(({ quote, author, position, image }, index) => (
+              <div key={index} className="bg-white shadow p-6">
+                <blockquote className="text-lg italic text-gray-700 mb-4 leading-relaxed font-serif">
+                  “{quote}”
+                </blockquote>
+
+                <div className="flex items-center justify-center gap-4 mt-4">
+                  <img
+                    src={image}
+                    alt={author}
+                    className="w-14 h-14 rounded-full object-cover border-4 border-blue-200"
+                  />
+                  <div>
+                    <h4 className="text-md font-semibold text-gray-900">{author}</h4>
+                    <p className="text-sm text-gray-500">{position}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+
+      {/* Custom arrow styling */}
+      <style>
+        {`
+          .slick-prev-custom, .slick-next-custom {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            border-radius: 50%;
+            padding: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 10;
+          }
+
+          .slick-prev-custom {
+            left: -30px;
+          }
+
+          .slick-next-custom {
+            right: -30px;
+          }
+
+          .slick-dots li button:before {
+            font-size: 12px;
+            color: #999;
+          }
+
+          .slick-dots li.slick-active button:before {
+            color: #2563eb;
+          }
+        `}
+      </style>
+    </section>
+  );
 };
 
 export default Testimonial;

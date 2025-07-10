@@ -1,6 +1,6 @@
 const Order = require('../model/order');
 const Cart = require('../model/cart');
-const Product = require('../model/product');
+// const Product = require('../model/product');
 
 // Place an order (from cart)
 exports.placeOrder = async (req, res) => {
@@ -15,7 +15,7 @@ exports.placeOrder = async (req, res) => {
         const items = cart.items.map((item) => ({
             product: item.product._id,
             quantity: item.quantity,
-            seller: item.product.seller
+            // seller: item.product.seller
         }));
 
         const totalAmount = cart.items.reduce(

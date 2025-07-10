@@ -1,118 +1,112 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-    return (
-        <footer className="footer-section bg-amber-800 text-center">
-            <div className="container relative">
+  return (
+    <footer className="bg-gray-900 text-white py-16">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Logo and Newsletter */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+          <div className="text-center md:text-left">
+            <img
+              src="../../public/images/logo/logo2.png"
+              alt="Logo"
+              className="h-20 mx-auto md:mx-0"
+            />
+            <p className="mt-4 max-w-md text-sm text-gray-300">
+              At SelfySnap, we believe beauty is more than skin deep — it’s a celebration of confidence, care, and self-expression. Founded with a passion for clean, effective, and inclusive beauty, SelfySnap blends science and nature to create skincare and cosmetic products that work for every skin type and tone.
+            </p>
+            <ul className="flex gap-4 mt-4 justify-center md:justify-start text-white text-xl">
+              <li><Link className="text-white" to="https://facebook.com"><i className="fab fa-facebook-f"></i></Link></li>
+              <li><Link className="text-white" to="#"><i className="fab fa-twitter"></i></Link></li>
+              <li><Link className="text-white" to="#"><i className="fab fa-instagram"></i></Link></li>
+              <li><Link className="text-white" to="#"><i className="fab fa-linkedin"></i></Link></li>
+            </ul>
+          </div>
 
-                <div className="akash">
-                    <img src="images/logo/makeup10.png" alt="Image" className="w-30 h-auto" />
-                </div>
+          <div className="w-full max-w-xl text-center md:text-left">
+            <h3 className="text-lg font-semibold mb-4 flex items-center justify-center md:justify-start gap-2">
+              <img
+                src="/images/envelope-outline.svg"
+                alt="Newsletter"
+                className="h-6"
+              />
+              Subscribe to Newsletter
+            </h3>
+            <form className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="text"
+                placeholder="Enter your name"
+                className="w-full px-4 py-2 rounded bg-white text-black"
+              />
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full px-4 py-2 rounded bg-white text-black"
+              />
+              <button className="bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
 
+        {/* Links Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm text-gray-300 mb-12">
+          <div>
+            <h4 className="font-semibold text-white mb-3">Company</h4>
+            <ul className="space-y-2">
+              <li><Link className="text-white" to="/about">About Us</Link></li>
+              <li><Link className="text-white" to="/product">Products</Link></li>
+              <li><Link className="text-white" to="/blog">Blog</Link></li>
+              <li><Link className="text-white" to="/contact">Contact Us</Link></li>
+            </ul>
+          </div>
 
+          <div>
+            <h4 className="font-semibold text-white mb-3">Support</h4>
+            <ul className="space-y-2">
+              <li><Link className="text-white" to="#">24/7 Support</Link></li>
+              <li><Link className="text-white" to="#">Live Chat</Link></li>
+              <li><Link className="text-white" to="#">Our Products</Link></li>
+              <li><Link className="text-white" to="#">Mobile: +91 9992088843</Link></li>
+            </ul>
+          </div>
 
-                <div className="row">
-                    <div className="col-lg-8">
-                        <div className="subscription-form">
-                            <h3 className="d-flex align-items-center"><span className="me-1"><img src="images/envelope-outline.svg" alt="Image" className="img-fluid" /></span><span>Subscribe to Newsletter</span></h3>
+          <div>
+            <h4 className="font-semibold text-white mb-3">Legal</h4>
+            <ul className="space-y-2">
+              <li><Link className="text-white" to="#">Terms & Conditions</Link></li>
+              <li><Link className="text-white" to="#">Privacy Policy</Link></li>
+              <li><Link className="text-white" to="#">Our Team</Link></li>
+              <li><Link className="text-white" to="#">Email: support@selfysnap.com</Link></li>
+            </ul>
+          </div>
 
-                            <form action="#" className="row g-3">
-                                <div className="col-auto">
-                                    <input type="text" className="form-control" placeholder="Enter your name" />
-                                </div>
-                                <div className="col-auto">
-                                    <input type="email" className="form-control" placeholder="Enter your email" />
-                                </div>
-                                <div className="col-auto">
-                                    <button className="btn btn-primary">
-                                        <span className="fa fa-paper-plane"></span>
+          <div>
+            <h4 className="font-semibold text-white mb-3">Orders</h4>
+            <ul className="space-y-2">
+              <li><Link className="text-white" to="#">My Orders</Link></li>
+              <li><Link className="text-white" to="#">Return Policy</Link></li>
+              <li><Link className="text-white" to="#">Shipping Info</Link></li>
+            </ul>
+          </div>
+        </div>
 
-                                    </button>
-                                </div>
-                            </form>
+        {/* Bottom Footer */}
+        <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between text-sm text-gray-400">
+          <p className="text-center md:text-left">
+            &copy; {new Date().getFullYear()} SelfySnap. All rights reserved. | Designed by{" "}
+            <a href="https://web4businesssolutions.com" className="!text-pink-500 hover:underline">Web4BusinessSolutions.com</a>
+          </p>
+          <div className="flex justify-center md:justify-end gap-6 mt-4 md:mt-0">
+            <Link className="text-white" to="#">Terms</Link>
+            <Link className="text-white" to="#">Privacy</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row g-5 mb-5">
-                    <div className="col-lg-4">
-                        <div className="mb-4 footer-logo-wrap"> <a href="#" className="flex items-center">
-                            <img src="/images/logo/logo2.png" alt="Logo" className="h-12" />
-                        </a></div>
-                        <p className="mb-4 text-black">At SelfySnap, we believe beauty is more than skin deep — it’s a celebration of confidence, care, and self-expression. Founded with a passion for clean, effective, and inclusive beauty, SelfySnap blends science and nature to create skincare and cosmetic products that work for every skin type and tone.</p>
-
-                        <ul className="list-unstyled custom-social">
-                            <li><Link to={'https://facebook.com'}><span className="fa fa-brands fa-facebook-f"></span></Link></li>
-                            <li><a href="#"><span className="fa fa-brands fa-twitter"></span></a></li>
-                            <li><a href="#"><span className="fa fa-brands fa-instagram"></span></a></li>
-                            <li><a href="#"><span className="fa fa-brands fa-linkedin"></span></a></li>
-                        </ul>
-                    </div>
-
-                    <div className="col-lg-8">
-                        <div className="row links-wrap">
-                            <div className="col-6 col-sm-6 col-md-3">
-                                <ul className="list-unstyled">
-                                    <li><Link to={'/About'}>About us</Link></li>
-                                    <li><Link to={'/product'}>Products</Link></li>
-                                    <li><Link to={'/Blog'}>Blog</Link></li>
-                                    <li><Link to={'/contact'}>Contact us</Link></li>
-
-                                </ul>
-                            </div>
-
-                            <div className="col-6 col-sm-6 col-md-3">
-                                <ul className="list-unstyled">
-                                    <li><a href="#">24/7 Support</a></li>
-                                    <li><a href="#">Our Products</a></li>
-                                    <li><a href="#">Live chat</a></li>
-                                    <li><a href="#">Mobile No: +91 9992088843 </a></li>
-                                </ul>
-                            </div>
-
-                            <div className="col-6 col-sm-6 col-md-3">
-                                <ul className="list-unstyled">
-                                    <li><a href="#">Terms & Condition</a></li>
-                                    <li><a href="#">Our team</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Email:Support@selfysnap.com</a></li>
-                                </ul>
-                            </div>
-
-                            <div className="col-6 col-sm-6 col-md-3">
-                                <ul className="list-unstyled">
-                                    <li><a href="#">Orders</a></li>
-                                    <li><a href="#">Return Policy</a></li>
-                                    <li><a href="#">About</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="border-top copyright">
-                    <div className="row pt-4">
-                        <div className="col-lg-6">
-                            <p className="mb-2 text-center text-lg-start text-black">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed by<a href="https://untree.co"></a> <a hreff="#">Web4Businesssolutions.com</a>
-                            </p>
-                        </div>
-
-                        <div className="col-lg-6 text-center text-lg-end">
-                            <ul className="list-unstyled d-inline-flex ms-auto">
-                                <li className="me-4"><a href="#">Terms &amp; Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </footer>
-    )
-}
-
-export default Footer
+export default Footer;

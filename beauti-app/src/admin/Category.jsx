@@ -1,232 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-
-// const Category = () => {
-//     const [name, setName] = useState("");
-//     const [categories, setCategories] = useState([]);
-//     const [editMode, setEditMode] = useState(false);
-//     const [editId, setEditId] = useState(null);
-
-//     const fetchCategories = async () => {
-//         const res = await axios.get("http://localhost:4000/api/categories/all");
-//         setCategories(res.data.categories);
-//     };
-
-//     useEffect(() => {
-//         fetchCategories();
-//     }, []);
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         if (editMode) {
-//             await axios.put(`http://localhost:4000/api/categories/update/${editId}`, { name });
-//         } else {
-//             await axios.post("http://localhost:4000/api/categories/create", { name });
-//         }
-//         setName("");
-//         setEditMode(false);
-//         fetchCategories();
-//     };
-
-//     const handleEdit = (cat) => {
-//         setEditMode(true);
-//         setEditId(cat._id);
-//         setName(cat.name);
-//     };
-
-//     const handleDelete = async (id) => {
-//         await axios.delete(`http://localhost:4000/api/categories/delete/${id}`);
-//         fetchCategories();
-//     };
-
-//     return (
-//         <div className="p-6">
-//             <h2 className="text-2xl font-semibold mb-4">Manage Categories</h2>
-//             <form onSubmit={handleSubmit} className="mb-4 flex gap-4">
-//                 <input
-//                     type="text"
-//                     value={name}
-//                     onChange={(e) => setName(e.target.value)}
-//                     placeholder="Category Name"
-//                     className="border px-3 py-1 rounded w-64"
-//                 />
-//                 <button className="bg-blue-600 text-white px-4 py-1 rounded">
-//                     {editMode ? "Update" : "Add"}
-//                 </button>
-//             </form>
-//             <div>
-//                 {categories.map((cat, idx) => (
-//                     <div key={cat._id} className="flex justify-between w-96 mb-2 border p-2 rounded">
-//                         <span>{idx + 1}. {cat.name}</span>
-//                         <div className="flex gap-2">
-//                             <button onClick={() => handleEdit(cat)} className="bg-yellow-400 px-2 py-1 rounded">Edit</button>
-//                             <button onClick={() => handleDelete(cat._id)} className="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
-//                         </div>
-//                     </div>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Category;
-
-
-
-
-
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
-
-// const Category = () => {
-//     const [name, setName] = useState("");
-//     const [categories, setCategories] = useState([]);
-//     const [editMode, setEditMode] = useState(false);
-//     const [editId, setEditId] = useState(null);
-
-//     const fetchCategories = async () => {
-//         const res = await axios.get("http://localhost:4000/api/categories/all");
-//         setCategories(res.data.categories);
-//     };
-
-//     useEffect(() => {
-//         fetchCategories();
-//     }, []);
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         if (!name.trim()) return;
-//         if (editMode) {
-//             await axios.put(`http://localhost:4000/api/categories/update/${editId}`, { name });
-//         } else {
-//             await axios.post("http://localhost:4000/api/categories/create", { name });
-//         }
-//         setName("");
-//         setEditMode(false);
-//         fetchCategories();
-//     };
-
-//     const handleEdit = (cat) => {
-//         setEditMode(true);
-//         setEditId(cat._id);
-//         setName(cat.name);
-//     };
-
-//     const handleDelete = async (id) => {
-//         if (window.confirm("Are you sure you want to delete this category?")) {
-//             await axios.delete(`http://localhost:4000/api/categories/delete/${id}`);
-//             fetchCategories();
-//         }
-//     };
-
-//     return (
-//         <div className="min-h-screen bg-gray-50 p-6">
-//             <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8">
-//                 <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-8">
-//                     🗂 Category Management
-//                 </h2>
-
-//                 {/* Form */}
-//                 <form
-//                     onSubmit={handleSubmit}
-//                     className="flex flex-col md:flex-row items-center gap-4 mb-10"
-//                 >
-//                     <input
-//                         type="text"
-//                         value={name}
-//                         onChange={(e) => setName(e.target.value)}
-//                         placeholder="Enter category name"
-//                         className="w-full md:flex-1 border border-gray-300 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-//                     />
-//                     <button
-//                         type="submit"
-//                         className={`px-6 py-2 text-white rounded-md font-medium tracking-wide transition duration-300 ${editMode
-//                                 ? "bg-yellow-500 hover:bg-yellow-600"
-//                                 : "bg-blue-600 hover:bg-blue-700"
-//                             }`}
-//                     >
-//                         {editMode ? "Update" : "Add"}
-//                     </button>
-//                 </form>
-
-//                 {/* Table */}
-//                 <div className="overflow-x-auto">
-//                     <table className="w-full bg-white border border-gray-200 rounded-lg shadow-sm">
-//                         <thead className="bg-gray-100">
-//                             <tr>
-//                                 <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">#</th>
-//                                 <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Category</th>
-//                                 <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Actions</th>
-//                             </tr>
-//                         </thead>
-//                         <tbody>
-//                             {categories.length === 0 ? (
-//                                 <tr>
-//                                     <td colSpan="3" className="text-center py-6 text-gray-500">
-//                                         No categories found.
-//                                     </td>
-//                                 </tr>
-//                             ) : (
-//                                 categories.map((cat, index) => (
-//                                     <tr
-//                                         key={cat._id}
-//                                         className="border-t hover:bg-gray-50 transition duration-200"
-//                                     >
-//                                         <td className="px-4 py-3 text-sm text-gray-700">{index + 1}</td>
-//                                         <td className="px-4 py-3 text-sm font-medium text-gray-800">
-//                                             {cat.name}
-//                                         </td>
-//                                         <td className="px-4 py-3">
-//                                             <div className="flex gap-4">
-//                                                 <button
-//                                                     onClick={() => handleEdit(cat)}
-//                                                     className="text-yellow-500 hover:text-yellow-600 transition"
-//                                                     title="Edit"
-//                                                 >
-//                                                     <PencilSquareIcon className="w-5 h-5" />
-//                                                 </button>
-//                                                 <button
-//                                                     onClick={() => handleDelete(cat._id)}
-//                                                     className="text-red-500 hover:text-red-600 transition"
-//                                                     title="Delete"
-//                                                 >
-//                                                     <TrashIcon className="w-5 h-5" />
-//                                                 </button>
-//                                             </div>
-//                                         </td>
-//                                     </tr>
-//                                 ))
-//                             )}
-//                         </tbody>
-//                     </table>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Category;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { PencilSquareIcon, TrashIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
@@ -237,6 +8,7 @@ const Category = () => {
     const [editMode, setEditMode] = useState(false);
     const [editId, setEditId] = useState(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
+    const [image, setImage] = useState(null);
 
     const fetchCategories = async () => {
         try {
@@ -255,19 +27,34 @@ const Category = () => {
         e.preventDefault();
         if (!name.trim()) return;
 
+        const formData = new FormData();
+        formData.append("name", name);
+        if (image) formData.append("image", image);
+
         try {
             if (editMode) {
-                await axios.put(`http://localhost:4000/api/categories/update/${editId}`, { name });
+                await axios.put(
+                    `http://localhost:4000/api/categories/update/${editId}`,
+                    formData,
+                    { headers: { "Content-Type": "multipart/form-data" } }
+                );
             } else {
-                await axios.post("http://localhost:4000/api/categories/create", { name });
+                await axios.post(
+                    "http://localhost:4000/api/categories/create",
+                    formData,
+                    { headers: { "Content-Type": "multipart/form-data" } }
+                );
             }
+
             setName("");
+            setImage(null);
             setEditMode(false);
             fetchCategories();
         } catch (error) {
             console.error("Operation failed:", error);
         }
     };
+
 
     const handleEdit = (cat) => {
         setEditMode(true);
@@ -316,20 +103,30 @@ const Category = () => {
                 {isFormOpen && (
                     <div className="p-4 border-b border-gray-200">
                         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-                            <div className="flex-1">
+                            <div className="flex flex-col sm:flex-row gap-3 w-full">
+                                {/* Text Input */}
                                 <input
                                     type="text"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     placeholder="Enter category name"
-                                    className="w-full border border-gray-300 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="flex-1 border border-gray-300 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                />
+
+                                {/* File Input */}
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => setImage(e.target.files[0])}
+                                    className="w-full sm:w-1/2 border border-gray-300 px-4 py-2 rounded-lg shadow-sm"
                                 />
                             </div>
+
                             <button
                                 type="submit"
                                 className={`px-4 py-2 text-white rounded-lg font-medium tracking-wide transition duration-300 flex items-center justify-center gap-1 ${editMode
-                                        ? "bg-yellow-500 hover:bg-yellow-600"
-                                        : "bg-blue-600 hover:bg-blue-700"
+                                    ? "bg-yellow-500 hover:bg-yellow-600"
+                                    : "bg-blue-600 hover:bg-blue-700"
                                     }`}
                             >
                                 {editMode ? (
@@ -374,6 +171,12 @@ const Category = () => {
                                         <div className="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center font-medium text-sm mr-3">
                                             {index + 1}
                                         </div>
+                                        <img
+                                            src={`http://localhost:4000/uploads/${cat.image}`}
+                                            alt={cat.name}
+                                            className="w-10 h-10 rounded-full object-cover mr-3"
+                                        />
+
                                         <span className="font-medium text-gray-800 truncate max-w-[120px] sm:max-w-[150px]">
                                             {cat.name}
                                         </span>

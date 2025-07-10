@@ -17,23 +17,23 @@ const Hero = () => {
         autoplaySpeed: 7000,
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: false,
+        arrows: true, // Always true — we’ll show/hide using CSS
         pauseOnHover: false,
-        cssEase: "linear",
+        cssEase: 'linear',
     };
 
     return (
-        <div className="w-full overflow-hidden mb-8">
+        <div className="relative group w-full overflow-hidden mb-4">
             {renderSlider && (
                 <Slider {...settings}>
-                    <div>
+                    <div className="h-[550px]">
                         <img
                             src="images/logo/banner.png"
-                            alt="Banner 1"
+                            alt="Banner"
                             className="w-full h-full object-cover"
                         />
                     </div>
-                    <div>
+                    <div className="h-[550px]">
                         <video
                             className="w-full h-full object-cover"
                             autoPlay
@@ -41,11 +41,9 @@ const Hero = () => {
                             muted
                             playsInline
                             src="images/logo/Selfy Snap best product.mp4"
-                        >
-                            Sorry, your browser does not support the video tag.
-                        </video>
+                        />
                     </div>
-                    <div>
+                    <div className="h-[550px]">
                         <video
                             className="w-full h-full object-cover"
                             autoPlay
@@ -53,12 +51,45 @@ const Hero = () => {
                             muted
                             playsInline
                             src="images/logo/Selfy Snap best products.mp4"
-                        >
-                            Sorry, your browser does not support the video tag.
-                        </video>
+                        />
                     </div>
                 </Slider>
             )}
+
+            {/* Style overrides for slick arrows */}
+            <style>
+                {`
+                .slick-prev, .slick-next {
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                    z-index: 10;
+                    width: 80px;
+                    height: 80px;
+                }
+
+                .group:hover .slick-prev,
+                .group:hover .slick-next {
+                    opacity: 1;
+                }
+
+                .slick-prev {
+                    left: 30px !important;
+                }
+
+                .slick-next {
+                    right: 30px !important;
+                }
+
+                .slick-prev:before, .slick-next:before {
+                    color: #000;
+                    font-size: 60px;
+                }
+
+                .slick-dots {
+                    bottom: 10px;
+                }
+                `}
+            </style>
         </div>
     );
 };

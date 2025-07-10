@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -20,7 +20,6 @@ const Login = () => {
         e.preventDefault();
         try {
             const res = await axios.post('http://localhost:4000/api/auth/login', formData);
-
             const { user, token } = res.data;
 
             if (!token || !user) {
@@ -28,12 +27,9 @@ const Login = () => {
                 return;
             }
 
-            try {
-                localStorage.setItem("token", token);
-                localStorage.setItem("user", JSON.stringify(user));
-            } catch (storageErr) {
-                console.error("❌ Failed to save token:", storageErr);
-            }
+            localStorage.setItem('role', user.role);
+            localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(user));
 
             toast.success("Login Successful!");
 
@@ -43,61 +39,96 @@ const Login = () => {
                 } else {
                     navigate("/");
                 }
-            }, 100); // short delay
+            }, 100);
         } catch (err) {
             console.error("Login Error:", err.response?.data || err.message);
             toast.error(err.response?.data?.error || "Login failed");
         }
     };
 
-
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-100 px-4">
-            <form
-                onSubmit={handleSubmit}
-                className="bg-white p-8 rounded shadow-md w-full max-w-sm"
-            >
-                <h2 className="text-2xl font-bold mb-6 text-center text-blue-500">Login to SelfySnap</h2>
+        <div className="h-screen flex flex-col md:flex-row bg-gradient-to-r from-green-100 to-white">
+            {/* Left Panel with Illustration */}
+            <div className="w-full md:w-1/2 flex justify-center items-center bg-[#A3C6B3]">
+                <img
+                    src="/images/logo/logoside.png"
+                    alt="Lovebird Illustration"
+                    className="w-3/4 max-w-md float-updown"
+                />
+            </div>
 
-                <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    />
-                </div>
+            <style>
+                {`
+          .float-updown {
+            animation: floatUpDown 3s ease-in-out infinite;
+          }
 
-                <div className="mb-6">
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        required
-                        value={formData.password}
-                        onChange={handleChange}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    />
-                </div>
+          @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+        `}
+            </style>
 
-                <button
-                    type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-200"
+
+            {/* Right Panel - Login Form */}
+            <div className="w-full md:w-1/2 flex justify-center items-center p-8">
+                <form
+                    onSubmit={handleSubmit}
+                    className="bg-white w-full max-w-md p-10 rounded-lg shadow-lg"
                 >
-                    Login
-                </button>
-            </form>
+                    <h1 className="text-center mb-4">
+                        <img src="/images/logo/logo2.png" alt="Lovebirds Logo" className="mx-auto h-12 w-auto" />
+                    </h1>
+                    <p className="text-center text-gray-600 mb-6">
+                        Welcome to Selfysnap
+                    </p>
 
-            {/* ✅ Toast container */}
+                    <div className="mb-4">
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                            Users name or Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        placeholder="Enter your email or username"
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            value={formData.password}
+                            onChange={handleChange}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            placeholder="Enter your password"
+                        />
+                        <div className="text-right mt-1 text-sm text-blue-500 hover:underline cursor-pointer">
+                            Forgot password?
+                        </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="w-full bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 transition duration-200 shadow-lg !rounded-full"
+                    >
+                        Sign in
+                    </button>
+                    <p className='pt-2'>don't have an account? <Link to={'/register'}>Register</Link></p>
+                </form>
+            </div>
+
             <ToastContainer position="bottom-right" />
         </div>
     );

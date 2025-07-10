@@ -2,24 +2,35 @@
 import React from 'react';
 import Hero from '../Component/Hero';
 import Product from '../Component/Product';
-import Products from '../Component/Products';
+// import Products from '../Component/Products';
 // import OurProduct from '../Component/OurProduct';
 import Choose from '../Component/Choose';
-import HelpSection from '../Component/HelpSection';
+// import HelpSection from '../Component/HelpSection';
 import Testimonial from '../Component/Testimonial';
 import Blog from '../Component/Blog';
+import CategoryList from '../Component/CategoryList';
+import LatestProduct from '../Component/LatestProduct';
+import BestSellingProduct from '../Component/BestSellingProduct';
+import Brand from '../Component/Brand';
+import StoreHighlight from '../Component/StoreHighlight';
+import RunningContent from '../Component/RunningContent';
+import SideOffer from '../Component/SideOffer';
 
 const Home = () => {
     return (
         <>
+            <CategoryList />
             <Hero />
             <Product />
-            <Products />
+            <LatestProduct />
+            {/* <Products /> */}
             {/* <OurProduct /> */}
             <Choose />
-            <div className='mt-6'>
-                <HelpSection />
-            </div>
+            <RunningContent />
+            <SideOffer />
+            <BestSellingProduct />
+            <Brand />
+            <StoreHighlight />
             <Testimonial />
             <Blog />
         </>
