@@ -10,7 +10,7 @@ const User = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get('http://localhost:4000/api/users/all', {
+      const res = await axios.get('https://selfy-snap-o6ka.onrender.com/api/users/all', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

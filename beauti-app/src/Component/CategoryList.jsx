@@ -6,7 +6,7 @@ const CategoryScroll = () => {
 
     const fetchCategories = async () => {
         try {
-            const res = await axios.get("http://localhost:4000/api/categories/all");
+            const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/categories/all");
             setCategories(res.data.categories);
         } catch (error) {
             console.error("Failed to fetch categories:", error);
@@ -23,7 +23,7 @@ const CategoryScroll = () => {
                     {categories.map((cat) => (
                         <div key={cat._id} className="flex flex-col items-center min-w-[72px]">
                             <img
-                                src={`http://localhost:4000/uploads/${cat.image}`}
+                                src={`https://selfy-snap-o6ka.onrender.com/uploads/${cat.image}`}
                                 alt={cat.name}
                                 className="w-14 h-14 rounded-full object-cover mb-1 shadow-sm border"
                             />

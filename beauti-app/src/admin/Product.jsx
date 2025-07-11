@@ -23,7 +23,7 @@ const ProductTable = () => {
         return;
       }
 
-      const res = await axios.get('http://localhost:4000/api/productdetail/myproducts', {
+      const res = await axios.get('https://selfy-snap-o6ka.onrender.com/api/productdetail/myproducts', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +38,7 @@ const ProductTable = () => {
     if (!window.confirm('Are you sure to delete this product?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:4000/api/productdetail/delete/${id}`, {
+      await axios.delete(`https://selfy-snap-o6ka.onrender.com/api/productdetail/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -62,7 +62,7 @@ const ProductTable = () => {
       name: 'Image',
       cell: row =>
         row.image ? (
-          <img src={`http://localhost:4000${row.image}`} alt="product" className="h-12 w-12 object-cover" />
+          <img src={`https://selfy-snap-o6ka.onrender.com${row.image}`} alt="product" className="h-12 w-12 object-cover" />
         ) : (
           'N/A'
         )

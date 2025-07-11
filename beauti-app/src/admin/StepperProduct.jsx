@@ -59,7 +59,7 @@ const StepperForm = () => {
     });
 
     // ✅ Add Authorization header with Bearer token
-    await axios.post('http://localhost:4000/api/productdetail/createdetail', formData, {
+    await axios.post('https://selfy-snap-o6ka.onrender.com/api/productdetail/createdetail', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,

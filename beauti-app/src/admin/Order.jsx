@@ -19,7 +19,7 @@ const Order = () => {
             }
 
             try {
-                const res = await axios.get(`http://localhost:4000/api/orders/seller`, {
+                const res = await axios.get(`https://selfy-snap-o6ka.onrender.com/api/orders/seller`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -67,7 +67,7 @@ const Order = () => {
                                     <td className="border p-2">{order._id}</td>
                                     <td className="border p-2 flex items-center gap-2">
                                         <img
-                                            src={`http://localhost:4000${item.product.images[0]}`}
+                                            src={`https://selfy-snap-o6ka.onrender.com${item.product.images[0]}`}
                                             alt={item.product?.name || 'Product'}
                                             className="w-10 h-10 object-cover rounded"
                                         />

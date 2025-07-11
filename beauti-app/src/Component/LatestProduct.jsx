@@ -13,7 +13,7 @@ const LatestProductsCarousel = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get("http://localhost:4000/api/products/all-products");
+                const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/products/all-products");
                 setProducts(res.data.products || []);
             } catch (error) {
                 console.error("Failed to fetch products:", error);
@@ -53,7 +53,7 @@ const LatestProductsCarousel = () => {
 
             <Slider {...settings}>
                 {products.map(({ _id, name, price, images = [], category }) => {
-                    const imageUrl = images.length > 0 ? `http://localhost:4000${images[0]}` : "/no-image.png";
+                    const imageUrl = images.length > 0 ? `https://selfy-snap-o6ka.onrender.com${images[0]}` : "/no-image.png";
 
                     return (
                         <div key={_id} className="p-2">

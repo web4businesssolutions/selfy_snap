@@ -29,7 +29,7 @@ const Order = () => {
 
     const fetchOrders = async () => {
         try {
-            const res = await axios.get('http://localhost:4000/api/orders/my', {
+            const res = await axios.get('https://selfy-snap-o6ka.onrender.com/api/orders/my', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setOrders(res.data);
@@ -45,7 +45,7 @@ const Order = () => {
     const handlePlaceOrder = async () => {
         try {
             await axios.post(
-                'http://localhost:4000/api/orders/place',
+                'https://selfy-snap-o6ka.onrender.com/api/orders/place',
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -76,7 +76,7 @@ const Order = () => {
                             product && (
                                 <div key={product._id} className="flex gap-4 border rounded-lg p-3 shadow-sm bg-white">
                                     <img
-                                        src={`http://localhost:4000${product.images[0]}`}
+                                        src={`https://selfy-snap-o6ka.onrender.com${product.images[0]}`}
                                         alt={product.name}
                                         className="w-20 h-20 object-contain border rounded"
                                     />
@@ -148,7 +148,7 @@ const Order = () => {
                                     {order.items.map((item) => (
                                         <div key={item._id} className="flex gap-3 border rounded p-2 bg-gray-50">
                                             <img
-                                                src={`http://localhost:4000${item.product?.images?.[0]}`}
+                                                src={`https://selfy-snap-o6ka.onrender.com${item.product?.images?.[0]}`}
                                                 alt={item.product?.name}
                                                 className="w-16 h-16 object-contain border rounded"
                                             />
