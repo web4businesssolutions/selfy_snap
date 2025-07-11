@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import DataTable from 'react-data-table-component';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaTrash, FaCheck, FaTimes } from 'react-icons/fa';
 
 const User = () => {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [filterText, setFilterText] = useState('');
   const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const fetchUsers = async () => {
     try {
@@ -16,60 +22,127 @@ const User = () => {
         },
       });
 
-      // ✅ Filter only 'customer' role users
-      if (Array.isArray(res.data)) {
-        const customerUsers = res.data.filter(user => user.role === 'seller');
-        setUsers(customerUsers);
-      } else {
-        setUsers([]);
-      }
+      const sellers = Array.isArray(res.data)
+        ? res.data.filter(user => user.role === 'seller')
+        : [];
+      setUsers(sellers);
     } catch (err) {
-      console.error('Fetch error:', err.message);
       toast.error('Failed to fetch users');
-    } finally {
-      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const handleToggleStatus = async (id, currentStatus) => {
+    try {
+      const res = await axios.put(
+        `http://localhost:4000/api/users/status/${id}`,
+        { isActive: !currentStatus },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success(res.data.message || 'Status updated');
+      fetchUsers();
+    } catch (err) {
+      toast.error('Failed to update status');
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure to delete this user?')) return;
+    try {
+      await axios.delete(`http://localhost:4000/api/users/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success('User deleted successfully');
+      fetchUsers();
+    } catch (err) {
+      toast.error('Failed to delete user');
+    }
+  };
+
+  const columns = [
+    { name: 'Name', selector: row => row.name, sortable: true },
+    { name: 'Email', selector: row => row.email, sortable: true },
+    { name: 'Role', selector: row => row.role, sortable: true },
+    {
+      name: 'Status',
+      cell: row => (
+        <button
+          onClick={() => handleToggleStatus(row._id, row.isActive)}
+          className={`px-2 py-1 rounded text-sm font-medium ${
+            row.isActive ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          }`}
+        >
+          {row.isActive ? 'Approved' : 'Declined'}
+        </button>
+      ),
+      sortable: true,
+    },
+    {
+      name: 'Created At',
+      selector: row =>
+        new Date(row.createdAt).toLocaleString('en-IN', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
+      sortable: true,
+    },
+    {
+      name: 'Actions',
+      cell: row => (
+        <div className="flex gap-3 text-lg">
+          <button
+            onClick={() => handleDelete(row._id)}
+            className="text-red-600 hover:text-red-800"
+            title="Delete User"
+          >
+            <FaTrash />
+          </button>
+        </div>
+      ),
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
+    },
+  ];
+
+  const filteredUsers = users.filter(
+    user =>
+      user.name?.toLowerCase().includes(filterText.toLowerCase()) ||
+      user.email?.toLowerCase().includes(filterText.toLowerCase())
+  );
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <ToastContainer position="top-right" autoClose={2000} />
-      <h1 className="text-2xl font-bold mb-4">All Customers</h1>
+    <div className="max-w-screen-xl mx-auto my-8 p-4 border rounded shadow bg-white">
+      <ToastContainer />
+      <h2 className="text-2xl font-bold mb-4 text-center">All Sellers</h2>
 
-      {loading ? (
-        <p className="text-gray-500">Loading...</p>
-      ) : users.length > 0 ? (
-        <div className="overflow-x-auto border rounded-lg shadow bg-white">
-          <table className="min-w-full divide-y divide-gray-200 text-sm">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="px-4 py-2 text-left font-semibold text-gray-700">Name</th>
-                <th className="px-4 py-2 text-left font-semibold text-gray-700">Email</th>
-                <th className="px-4 py-2 text-left font-semibold text-gray-700">Role</th>
-                <th className="px-4 py-2 text-left font-semibold text-gray-700">Created At</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {users.map((user) => (
-                <tr key={user._id} className="hover:bg-gray-50">
-                  <td className="px-4 py-2">{user.name}</td>
-                  <td className="px-4 py-2">{user.email}</td>
-                  <td className="px-4 py-2 capitalize">{user.role}</td>
-                  <td className="px-4 py-2">
-                    {new Date(user.createdAt).toLocaleString()}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <p className="text-gray-500">No customers found.</p>
-      )}
+      <input
+        type="text"
+        placeholder="Search by name or email"
+        value={filterText}
+        onChange={(e) => setFilterText(e.target.value)}
+        className="mb-4 p-2 w-full border rounded"
+      />
+
+      <div className="overflow-auto max-h-[600px]">
+        <DataTable
+          columns={columns}
+          data={filteredUsers}
+          pagination
+          highlightOnHover
+          striped
+          dense
+          responsive
+        />
+      </div>
     </div>
   );
 };

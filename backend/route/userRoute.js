@@ -1,10 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const { getAllUsers } = require('../controller/userController');
 
-// Optional: Protect route if only admin should access
-// const { protect, isAdmin } = require('../middleware/authMiddleware');
+const {
+  getAllUsers,
+  updateUserStatus,
+  deleteUser
+} = require('../controller/userController');
 
-router.get('/all', /*protect, isAdmin,*/ getAllUsers);
+const { isAuthenticated } = require('../middleware/auth');
+
+// Get all users (admin-only route)
+router.get('/all', isAuthenticated, getAllUsers);
+
+// Update user active status (approve/decline toggle)
+router.put('/status/:id', isAuthenticated, updateUserStatus);
+
+// Delete a user by ID
+router.delete('/delete/:id', isAuthenticated, deleteUser);
 
 module.exports = router;

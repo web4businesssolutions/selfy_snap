@@ -1,4 +1,3 @@
-// UpdateProductForm.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -10,6 +9,7 @@ const UpdateProductForm = () => {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     category: '', image: '', brandName: '',
+    name: '',
     description: '', bulletPoints: '', images: [],
     manufacturer: '', ageRange: '', numberOfItems: '', itemTypeName: '', color: '', partNumber: '', manufacturerContact: '',
     isSensitive: false, isExpirable: false, unitCount: '', unitType: '',
@@ -28,9 +28,10 @@ const UpdateProductForm = () => {
         const product = res.data.product;
         setForm({
           ...product,
+          seller: undefined, // ❌ prevent seller from being sent
           bulletPoints: product.bulletPoints?.join(',') || '',
-          image: '', // Will be updated if user chooses new one
-          images: [], // Same as above
+          image: '',
+          images: [],
         });
         setPreviewImage(`http://localhost:4000${product.image}`);
         setPreviewGallery(product.images.map(img => `http://localhost:4000${img}`));
@@ -62,19 +63,36 @@ const UpdateProductForm = () => {
 
   const handleSubmit = async () => {
     try {
+      const token = localStorage.getItem('token');
+      if (!token) return toast.error('User not authenticated');
+
       const formData = new FormData();
+
+      // Append all form fields
       Object.entries(form).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          value.forEach(v => formData.append(key, v));
+        if (key === 'seller') return; // ❌ prevent updating seller
+
+        if (Array.isArray(value) && key === 'images') {
+          value.forEach(file => formData.append('images', file));
+        } else if (key === 'image' && value) {
+          formData.append('image', value);
         } else {
           formData.append(key, value);
         }
       });
 
-      await axios.put(`http://localhost:4000/api/productdetail/update/${id}`, formData);
+      await axios.put(`http://localhost:4000/api/productdetail/update/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       toast.success('Product updated successfully!');
     } catch (err) {
-      toast.error('Update failed: ' + err.message);
+      const message = err?.response?.data?.error || err.message;
+      toast.error('Update failed: ' + message);
+      console.error('Update error:', message);
     }
   };
 
@@ -114,7 +132,6 @@ const UpdateProductForm = () => {
       <ToastContainer />
       <h2 className="text-2xl font-bold text-center mb-8">Update Product - Step {step}/5</h2>
 
-      {/* Stepper */}
       <div className="flex items-center justify-between mb-10">
         {['Category', 'Description', 'Details', 'Offer', 'Compliance'].map((label, index) => (
           <div key={index + 1} className="flex-1 flex flex-col items-center relative">
@@ -132,7 +149,6 @@ const UpdateProductForm = () => {
         ))}
       </div>
 
-      {/* Step Fields */}
       <div className="space-y-4">
         {step === 1 && (
           <>
@@ -148,8 +164,9 @@ const UpdateProductForm = () => {
 
         {step === 2 && (
           <>
+            {renderInput('Product Name', 'name')}
             {renderTextarea('Description', 'description')}
-            {renderTextarea('Bullet Points', 'bulletPoints')}
+            {renderTextarea('Bullet Points (comma separated)', 'bulletPoints')}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Gallery Images</label>
               <input type="file" name="images" onChange={handleChange} multiple className="w-full" />
@@ -194,30 +211,25 @@ const UpdateProductForm = () => {
           </>
         )}
 
-        {step === 5 && <>{renderTextarea('Safety & Compliance Info', 'complianceInfo')}</>}
+        {step === 5 && (
+          <>
+            {renderTextarea('Safety & Compliance Info', 'complianceInfo')}
+          </>
+        )}
       </div>
 
       <div className="flex justify-between mt-6">
         {step > 1 && (
-          <button
-            onClick={() => setStep(step - 1)}
-            className="btn bg-gray-300 text-gray-700 hover:bg-gray-400 px-4 py-2 rounded"
-          >
+          <button onClick={() => setStep(step - 1)} className="btn bg-gray-300 text-gray-700 hover:bg-gray-400 px-4 py-2 rounded">
             Back
           </button>
         )}
         {step < 5 ? (
-          <button
-            onClick={() => setStep(step + 1)}
-            className="btn bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded"
-          >
+          <button onClick={() => setStep(step + 1)} className="btn bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded">
             Next
           </button>
         ) : (
-          <button
-            onClick={handleSubmit}
-            className="btn bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded"
-          >
+          <button onClick={handleSubmit} className="btn bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded">
             Update
           </button>
         )}

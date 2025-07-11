@@ -1,12 +1,20 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
+  // ✅ Seller reference
+  seller: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+
   // Step 1: Category
   category: { type: String, required: true },
   image: { type: String },
   brandName: { type: String },
 
   // Step 2: Description
+  name: { type: String, required: true },
   description: { type: String },
   bulletPoints: [{ type: String }],
   images: [{ type: String }],
@@ -36,7 +44,7 @@ const productSchema = new mongoose.Schema({
   itemCondition: { type: String },
 
   // Step 5: Compliance
-  complianceInfo: { type: String },
+  complianceInfo: { type: String }
 
 }, {
   timestamps: true

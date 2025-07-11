@@ -7,7 +7,7 @@ const StepperForm = () => {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     category: '', image: '', brandName: '',
-    description: '', bulletPoints: '', images: [],
+    name: '', description: '', bulletPoints: '', images: [],
     manufacturer: '', ageRange: '', numberOfItems: '', itemTypeName: '', color: '', partNumber: '', manufacturerContact: '',
     isSensitive: false, isExpirable: false, unitCount: '', unitType: '',
     width: '', height: '', length: '', weight: '',
@@ -40,23 +40,40 @@ const StepperForm = () => {
     }
   };
 
-  const handleSubmit = async () => {
-    try {
-      const formData = new FormData();
-      Object.entries(form).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          value.forEach(v => formData.append(key, v));
-        } else {
-          formData.append(key, value);
-        }
-      });
+ const handleSubmit = async () => {
+  try {
+    const token = localStorage.getItem('token'); // ✅ Get token from localStorage
 
-      await axios.post('http://localhost:4000/api/productdetail/createdetail', formData);
-      toast.success('Product added successfully!');
-    } catch (err) {
-      toast.error('Failed to add product: ' + err.message);
+    if (!token) {
+      toast.error('User not authenticated. Please log in.');
+      return;
     }
-  };
+
+    const formData = new FormData();
+    Object.entries(form).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach(v => formData.append(key, v));
+      } else {
+        formData.append(key, value);
+      }
+    });
+
+    // ✅ Add Authorization header with Bearer token
+    await axios.post('http://localhost:4000/api/productdetail/createdetail', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    toast.success('Product added successfully!');
+  } catch (err) {
+    const message = err?.response?.data?.message || err.message;
+    toast.error('Failed to add product: ' + message);
+    console.error('Submit Error:', message);
+  }
+};
+
 
   const renderInput = (label, name, type = 'text', placeholder = `Enter ${label.toLowerCase()}`) => (
     <div>
@@ -103,11 +120,10 @@ const StepperForm = () => {
           const current = index + 1;
           return (
             <div key={current} className="flex-1 flex flex-col items-center relative">
-              <div className={`rounded-full w-10 h-10 flex items-center justify-center border-2 text-sm font-medium ${
-                step === current ? 'bg-blue-500 text-white border-blue-500' :
-                step > current ? 'bg-green-500 text-white border-green-500' :
-                'text-gray-400 border-gray-300'
-              }`}>
+              <div className={`rounded-full w-10 h-10 flex items-center justify-center border-2 text-sm font-medium ${step === current ? 'bg-blue-500 text-white border-blue-500' :
+                  step > current ? 'bg-green-500 text-white border-green-500' :
+                    'text-gray-400 border-gray-300'
+                }`}>
                 {current}
               </div>
               <span className="text-sm mt-2 text-center text-gray-600">{label}</span>
@@ -137,6 +153,7 @@ const StepperForm = () => {
 
         {step === 2 && (
           <>
+            {renderInput("Product Name", "name")} {/* ✅ Added Product Name Field */}
             {renderTextarea("Description", "description")}
             {renderTextarea("Bullet Points", "bulletPoints", "Comma-separated points")}
             <div>
