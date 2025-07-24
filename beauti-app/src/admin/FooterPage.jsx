@@ -13,7 +13,7 @@ const AdminFooter = () => {
   const [logo, setLogo] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/footer/all").then(res => {
+    axios.get("https://selfy-snap-o6ka.onrender.com/api/footer/all").then(res => {
       setFooter(res.data);
       setFormData(res.data || {});
     });
@@ -92,9 +92,9 @@ const AdminFooter = () => {
     if (logo) form.append("logo", logo);
 
     if (footer?._id) {
-      await axios.put(`http://localhost:4000/api/footer/update/${footer._id}`, form);
+      await axios.put(`https://selfy-snap-o6ka.onrender.com/api/footer/update/${footer._id}`, form);
     } else {
-      await axios.post("http://localhost:4000/api/footer/add", form);
+      await axios.post("https://selfy-snap-o6ka.onrender.com/api/footer/add", form);
     }
 
     alert("Saved Successfully");
@@ -118,7 +118,7 @@ const AdminFooter = () => {
       <div className="mb-6">
         <label className="block mb-1 font-medium text-gray-700">Logo:</label>
         <input type="file" onChange={handleLogoChange} className="mb-2" />
-        {footer?.logoUrl && <img src={`http://localhost:4000/${footer.logoUrl}`} className="w-24 mt-2 rounded shadow" />}
+        {footer?.logoUrl && <img src={`https://selfy-snap-o6ka.onrender.com/${footer.logoUrl}`} className="w-24 mt-2 rounded shadow" />}
       </div>
 
       <div className="mb-6">

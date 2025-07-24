@@ -12,7 +12,7 @@ const Category = () => {
 
     const fetchCategories = async () => {
         try {
-            const res = await axios.get("http://localhost:4000/api/categories/all");
+            const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/categories/all");
             setCategories(res.data.categories);
         } catch (error) {
             console.error("Failed to fetch categories:", error);
@@ -34,13 +34,13 @@ const Category = () => {
         try {
             if (editMode) {
                 await axios.put(
-                    `http://localhost:4000/api/categories/update/${editId}`,
+                    `https://selfy-snap-o6ka.onrender.com/api/categories/update/${editId}`,
                     formData,
                     { headers: { "Content-Type": "multipart/form-data" } }
                 );
             } else {
                 await axios.post(
-                    "http://localhost:4000/api/categories/create",
+                    "https://selfy-snap-o6ka.onrender.com/api/categories/create",
                     formData,
                     { headers: { "Content-Type": "multipart/form-data" } }
                 );
@@ -66,7 +66,7 @@ const Category = () => {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this category?")) {
             try {
-                await axios.delete(`http://localhost:4000/api/categories/delete/${id}`);
+                await axios.delete(`https://selfy-snap-o6ka.onrender.com/api/categories/delete/${id}`);
                 fetchCategories();
             } catch (error) {
                 console.error("Delete failed:", error);
@@ -172,7 +172,7 @@ const Category = () => {
                                             {index + 1}
                                         </div>
                                         <img
-                                            src={`http://localhost:4000/uploads/${cat.image}`}
+                                            src={`https://selfy-snap-o6ka.onrender.com/uploads/${cat.image}`}
                                             alt={cat.name}
                                             className="w-10 h-10 rounded-full object-cover mr-3"
                                         />
