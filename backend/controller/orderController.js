@@ -15,7 +15,7 @@ exports.placeOrder = async (req, res) => {
         const items = cart.items.map((item) => ({
             product: item.product._id,
             quantity: item.quantity,
-            // seller: item.product.seller
+            seller: item.product.seller
         }));
 
         const totalAmount = cart.items.reduce(
@@ -50,40 +50,40 @@ exports.getMyOrders = async (req, res) => {
 };
 
 // Seller: Get orders containing their products
-// exports.getSellerOrders = async (req, res) => {
-//     try {
-//         const orders = await Order.find({ 'items.seller': req.user.id }).populate('items.product');
-//         res.json(orders);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
-
-
-
-
 exports.getSellerOrders = async (req, res) => {
     try {
-        const sellerId = req.user.id;
-
-        const orders = await Order.find({ 'items.seller': sellerId })
-            .populate('user', 'name email') // optional
-            .populate('items.product', 'name price images'); // ✅ fixed fields
-
-        const sellerOrders = orders.map(order => {
-            const sellerItems = order.items.filter(item => item.seller.toString() === sellerId);
-            return {
-                ...order.toObject(),
-                items: sellerItems
-            };
-        });
-
-        res.json(sellerOrders);
+        const orders = await Order.find({ 'items.seller': req.user.id }).populate('items.product');
+        res.json(orders);
     } catch (error) {
-        console.error("❌ Get Seller Orders Error:", error.message);
         res.status(500).json({ error: error.message });
     }
 };
+
+
+
+
+// exports.getSellerOrders = async (req, res) => {
+//     try {
+//         const sellerId = req.user.id;
+
+//         const orders = await Order.find({ 'items.seller': sellerId })
+//             .populate('user', 'name email') // optional
+//             .populate('items.product', 'name price images'); // ✅ fixed fields
+
+//         const sellerOrders = orders.map(order => {
+//             const sellerItems = order.items.filter(item => item.seller.toString() === sellerId);
+//             return {
+//                 ...order.toObject(),
+//                 items: sellerItems
+//             };
+//         });
+
+//         res.json(sellerOrders);
+//     } catch (error) {
+//         console.error("❌ Get Seller Orders Error:", error.message);
+//         res.status(500).json({ error: error.message });
+//     }
+// };
 
 
 // Admin: Get all orders

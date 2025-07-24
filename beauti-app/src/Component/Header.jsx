@@ -21,7 +21,7 @@ const Header = () => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) setUser(JSON.parse(storedUser));
 
-        axios.get('https://selfy-snap-o6ka.onrender.com/api/categories/all')
+        axios.get('http://localhost:4000/api/categories/all')
             .then(res => setCategories(res.data.categories || []))
             .catch(err => console.error("Failed to load categories", err));
     }, []);
@@ -87,6 +87,7 @@ const Header = () => {
                                     {user ? (
                                         <>
                                             <div className="px-3 py-1 text-gray-800 font-semibold">{user.name}</div>
+                                            <Link className='px-3 py-1 text-gray-800 font-semibold' to="/order">Order</Link>
                                             <button
                                                 onClick={handleLogout}
                                                 className="flex items-center gap-2 text-red-600 hover:text-red-800 px-3 py-1 w-full"

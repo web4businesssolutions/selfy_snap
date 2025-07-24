@@ -28,7 +28,8 @@
         "react-type-animation": "^3.2.0",
         "slick-carousel": "^1.8.1",
         "tailwindcss": "^4.1.8",
-        "tiny-slider": "^2.9.4"
+        "tiny-slider": "^2.9.4",
+        "uuid": "^11.1.0"
     },
     "devDependencies": {
         "@eslint/js": "^9.25.0",

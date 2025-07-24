@@ -10,6 +10,13 @@ import Category from './Category';
 import StepperForm from './StepperProduct';
 import UpdateStepperForm from './UpdateStepperProduct';
 import UserPage from './UserPage';
+import AboutPage from './AboutPage';
+import ContactPage from './ContactPage';
+import TermPage from './TermPage';
+import PrivacyPage from './PrivacyPage';
+import ReturnPage from './ReturnPage';
+import ShippingPage from './ShippingPage';
+import FooterPage from './FooterPage';
 
 const Main = () => {
     return (
@@ -31,6 +38,13 @@ const Main = () => {
                         <Route path="user" element={<User />} />
                         <Route path="order" element={<Order />} />
                         <Route path="vendor" element={<UserPage />} />
+                        <Route path="about" element={<AboutPage />} />
+                        <Route path="contact" element={<ContactPage />} />
+                        <Route path="term" element={<TermPage />} />
+                        <Route path="privacy" element={<PrivacyPage />} />
+                        <Route path="return" element={<ReturnPage />} />
+                        <Route path="shipping" element={<ShippingPage />} />
+                        <Route path="footer" element={<FooterPage />} />
                         <Route path="stepper-product" element={<StepperForm />} />
                         <Route path="stepper-product/:id" element={<UpdateStepperForm />} />
                     </Routes>

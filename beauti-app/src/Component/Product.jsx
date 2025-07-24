@@ -54,7 +54,7 @@ const ProductCard = ({ product }) => {
                 <div className="relative h-48">
                     <Link to={`/product/${_id}`}>
                         <img
-                            src={`https://selfy-snap-o6ka.onrender.com${images[currentImageIndex] || images[0]}`}
+                            src={`http://localhost:4000${images[currentImageIndex] || images[0]}`}
                             alt={name}
                             className="w-full h-full object-contain bg-white p-4 transition-all duration-500"
                         />
@@ -96,9 +96,11 @@ const ProductCard = ({ product }) => {
                 <div className="mb-2">
                     <Link to={`/product/${_id}`}>
                         <h3 className="text-md font-semibold text-gray-800 mb-1 hover:text-blue-600 transition-colors">
-                            {category}
+                            {name}
                         </h3>
                     </Link>
+
+                    <p>{category}</p>
 
                     <div className="flex items-center mb-1">
                         <div className="flex text-yellow-400">
@@ -117,13 +119,13 @@ const ProductCard = ({ product }) => {
                     <p className="text-blue-600 font-bold text-lg">₹{price}</p>
                 </div>
 
-                <div className="mt-4 flex gap-2">
+                <div className=" flex gap-2">
                     <button
                         onClick={handleAddToCart}
                         className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg transition text-sm font-medium
                             ${stock <= 0
                                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                : 'bg-blue-400 hover:bg-blue-500 text-white'}`}
+                                : 'bg-yellow-300 hover:bg-yellow-400 text-black'}`}
                         disabled={stock <= 0}
                     >
                         <ShoppingCart className="h-4 w-4" /> Add to Cart
@@ -132,7 +134,7 @@ const ProductCard = ({ product }) => {
                         className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg transition text-sm font-medium
                             ${stock <= 0
                                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                : 'bg-green-400 hover:bg-green-500 text-white'}`}
+                                : 'bg-orange-300 hover:bg-orange-400 text-black'}`}
                         disabled={stock <= 0}
                     >
                         <CreditCard className="h-4 w-4" /> Buy Now
@@ -150,7 +152,7 @@ const Product = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/productdetail/alldetails");
+                const res = await axios.get("http://localhost:4000/api/productdetail/alldetails");
                 setProducts(res.data.products);
             } catch (error) {
                 console.error("Failed to fetch products:", error);

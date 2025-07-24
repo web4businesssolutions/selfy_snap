@@ -15,9 +15,9 @@ const ProductDetails = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await axios.get(`https://selfy-snap-o6ka.onrender.com/api/productdetail/singledetail/${id}`);
+                const res = await axios.get(`http://localhost:4000/api/productdetail/singledetail/${id}`);
                 setProduct(res.data.product);
-                setSelectedImage(`https://selfy-snap-o6ka.onrender.com${res.data.product.images?.[0]}`);
+                setSelectedImage(`http://localhost:4000${res.data.product.images?.[0]}`);
             } catch (err) {
                 console.error("Failed to fetch product:", err);
                 setError('Failed to load product.');
@@ -50,10 +50,10 @@ const ProductDetails = () => {
                         {product.images?.slice(0, 4).map((img, index) => (
                             <img
                                 key={index}
-                                src={`https://selfy-snap-o6ka.onrender.com${img}`}
+                                src={`http://localhost:4000${img}`}
                                 alt={`Thumbnail ${index}`}
-                                onClick={() => setSelectedImage(`https://selfy-snap-o6ka.onrender.com${img}`)}
-                                className={`h-20 w-full object-contain cursor-pointer border p-1 rounded-lg transition duration-200 ${selectedImage === `https://selfy-snap-o6ka.onrender.com${img}`
+                                onClick={() => setSelectedImage(`http://localhost:4000${img}`)}
+                                className={`h-20 w-full object-contain cursor-pointer border p-1 rounded-lg transition duration-200 ${selectedImage === `http://localhost:4000${img}`
                                         ? 'border-blue-600 ring-2 ring-blue-300'
                                         : 'hover:border-blue-400'
                                     }`}
@@ -73,9 +73,9 @@ const ProductDetails = () => {
                         <div className="text-lg font-medium text-gray-800 mb-2">
                             Price: <span className="text-gray-900 font-bold">₹{product.price}</span>
                         </div>
-                        <div className="mb-1">Stock: <span className="text-gray-700">{product.stock}</span></div>
-                        <div className="mb-1">Brand: <span className="text-gray-700">{product.brand}</span></div>
-                        <div className="mb-1">Category: <span className="text-gray-700">{product.category?.name}</span></div>
+                        <div className="mb-1">Stock: <span className="text-gray-700">{product.quantity}</span></div>
+                        <div className="mb-1">Brand: <span className="text-gray-700">{product.brandName}</span></div>
+                        <div className="mb-1">Category: <span className="text-gray-700">{product.category}</span></div>
                     </div>
 
                     {/* Buttons */}

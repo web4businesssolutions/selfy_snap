@@ -25,6 +25,10 @@ import AdminLayout from './admin/Main';
 import ProductDetails from './Pages/ProductDetails';
 import CartPage from './Pages/CartPage';
 import Order from './Pages/Order';
+import TermCondition from './Pages/TermCondition';
+import PrivacyPolicy from './Pages/PrivacyPolicy';
+import ShippingPolicy from './Pages/ShippingPolicy';
+import ReturnPolicy from './Pages/ReturnPolicy';
 
 // PUBLIC LAYOUT WRAPPER
 const PublicLayout = ({ children }) => {
@@ -56,6 +60,10 @@ const PublicRoutes = () => (
       <Route path='/contact' element={<Contact />} />
       <Route path='/makeup' element={<Makeup />} />
       <Route path='/bath' element={<Bath />} />
+      <Route path='/term&condition' element={<TermCondition />} />
+      <Route path='/privacypolicy' element={<PrivacyPolicy />} />
+      <Route path='/returnpolicy' element={<ReturnPolicy />} />
+      <Route path='/shippingpolicy' element={<ShippingPolicy />} />
       <Route path='/treatement' element={<Treatement />} />
       <Route path='/makeuptool' element={<MakeupTool />} />
       <Route path='/product/:id' element={<ProductDetails />} />

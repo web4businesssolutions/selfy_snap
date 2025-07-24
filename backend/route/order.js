@@ -15,6 +15,6 @@ router.post('/place', isAuthenticated, placeOrder);
 router.get('/my', isAuthenticated, getMyOrders);
 // router.get('/seller', isAuthenticated, isSeller, getSellerOrders);
 router.get('/admin', isAuthenticated, isAdmin, getAllOrders);
-router.put('/admin/update/:id', isAuthenticated, isAdmin, updateOrderStatus);
+router.put('/admin/update/:id', isAuthenticated, isSeller, updateOrderStatus);
 
 module.exports = router;

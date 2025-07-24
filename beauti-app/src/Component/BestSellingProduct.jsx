@@ -13,7 +13,7 @@ const BestSellingProductsCarousel = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/products/all-products");
+        const res = await axios.get("http://localhost:4000/api/productdetail/alldetails");
         const bestSelling = res.data.products?.slice(0, 10); // Customize this logic
         setProducts(bestSelling || []);
       } catch (error) {
@@ -53,7 +53,7 @@ const BestSellingProductsCarousel = () => {
 
       <Slider {...settings}>
         {products.map(({ _id, name, price, images = [], category }) => {
-          const imageUrl = images.length > 0 ? `https://selfy-snap-o6ka.onrender.com${images[0]}` : "/no-image.png";
+          const imageUrl = images.length > 0 ? `http://localhost:4000${images[0]}` : "/no-image.png";
 
           return (
             <div key={_id} className="p-2">
@@ -78,16 +78,16 @@ const BestSellingProductsCarousel = () => {
                 <div className="flex flex-col justify-between flex-grow p-4">
                   <div>
                     <h3 className="text-sm font-semibold text-gray-900 truncate">{name}</h3>
-                    <p className="text-xs text-gray-500">{category?.name || "Uncategorized"}</p>
+                    <p className="text-xs text-gray-500">{category || "Uncategorized"}</p>
                     <p className="text-green-600 text-xl font-bold mt-1">₹{price}</p>
                   </div>
 
-                  <div className="mt-4 flex gap-2">
-                    <button className="flex-1 bg-blue-400 hover:bg-blue-500 text-white py-1.5 text-sm rounded-lg flex items-center justify-center gap-1">
+                  <div className="flex gap-2">
+                    <button className="flex-1 bg-yellow-300 hover:bg-yellow-400 text-black py-1.5 text-sm rounded-lg flex items-center justify-center gap-1">
                       <ShoppingCart size={16} />
                       Add to Cart
                     </button>
-                    <button className="flex-1 bg-green-400 hover:bg-green-500 text-white py-1.5 text-sm rounded-lg flex items-center justify-center gap-1">
+                    <button className="flex-1 bg-orange-300 hover:bg-orange-400 text-black py-1.5 text-sm rounded-lg flex items-center justify-center gap-1">
                       <Wallet size={16} />
                       Buy Now
                     </button>
