@@ -54,7 +54,7 @@ const ProductCard = ({ product }) => {
                 <div className="relative h-48">
                     <Link to={`/product/${_id}`}>
                         <img
-                            src={`https://selfy-snap-o6ka.onrender.com${images[currentImageIndex] || images[0]}`}
+                            src={images[currentImageIndex] || images[0]}
                             alt={name}
                             className="w-full h-full object-contain bg-white p-4 transition-all duration-500"
                         />
@@ -95,9 +95,9 @@ const ProductCard = ({ product }) => {
             <div className="p-4 flex flex-col flex-grow">
                 <div className="mb-2">
                     <Link to={`/product/${_id}`}>
-                        <h3 className="text-md font-semibold text-gray-800 mb-1 hover:text-blue-600 transition-colors">
+                        <h5 className="text-md font-semibold text-gray-800 mb-1 hover:text-blue-600 transition-colors truncate">
                             {name}
-                        </h3>
+                        </h5>
                     </Link>
 
                     <p>{category}</p>
@@ -152,7 +152,7 @@ const Product = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/productdetail/alldetails");
+                const res = await axios.get("https://selfy-snap-1-7kn9.onrender.com/api/productdetail/alldetails");
                 setProducts(res.data.products);
             } catch (error) {
                 console.error("Failed to fetch products:", error);

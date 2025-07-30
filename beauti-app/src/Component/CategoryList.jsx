@@ -8,7 +8,7 @@ const CategoryScroll = () => {
 
     const fetchCategories = async () => {
         try {
-            const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/categories/all");
+            const res = await axios.get("https://selfy-snap-1-7kn9.onrender.com/api/categories/all");
             setCategories(res.data.categories);
         } catch (error) {
             console.error("Failed to fetch categories:", error);
@@ -20,7 +20,7 @@ const CategoryScroll = () => {
     }, []);
 
     return (
-        <div className="bg-white py-4 px-2 overflow-x-auto scrollbar-hide">
+        <div className="py-2 px-2 overflow-x-auto scrollbar-hide mx-4">
             <div className="flex gap-6 min-w-max justify-center">
                 {categories.map((cat) => (
                     <Link
@@ -29,11 +29,15 @@ const CategoryScroll = () => {
                         className="flex flex-col items-center min-w-[72px] hover:bg-gray-100 p-2 rounded-md transition"
                     >
                         <img
-                            src={`https://selfy-snap-o6ka.onrender.com/uploads/${cat.image}`}
+                            src={cat.image}
                             alt={cat.name}
-                            className="w-14 h-14 rounded-full object-cover mb-1 shadow-sm border"
+                            className="w-14 h-14 rounded-full object-cover mb-1 shadow-sm border-2 border-b-pink-400"
                         />
-                        <span className="text-sm font-semibold text-center">{cat.name}</span>
+                        <span className="text-sm font-semibold text-center">
+                            {cat.name.length > 10 ? cat.name.slice(0, 15) + "..." : cat.name}
+                        </span>
+
+
                     </Link>
                 ))}
             </div>

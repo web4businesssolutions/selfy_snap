@@ -16,7 +16,7 @@ const User = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get('https://selfy-snap-o6ka.onrender.com/api/users/all', {
+      const res = await axios.get('https://selfy-snap-1-7kn9.onrender.com/api/users/all', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,7 +34,7 @@ const User = () => {
   const handleToggleStatus = async (id, currentStatus) => {
     try {
       const res = await axios.put(
-        `https://selfy-snap-o6ka.onrender.com/api/users/status/${id}`,
+        `https://selfy-snap-1-7kn9.onrender.com/api/users/status/${id}`,
         { isActive: !currentStatus },
         {
           headers: {
@@ -52,7 +52,7 @@ const User = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure to delete this user?')) return;
     try {
-      await axios.delete(`https://selfy-snap-o6ka.onrender.com/api/users/delete/${id}`, {
+      await axios.delete(`https://selfy-snap-1-7kn9.onrender.com/api/users/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

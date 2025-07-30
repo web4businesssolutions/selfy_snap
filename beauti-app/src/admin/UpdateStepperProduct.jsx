@@ -24,7 +24,7 @@ const UpdateProductForm = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`https://selfy-snap-o6ka.onrender.com/api/productdetail/singledetail/${id}`);
+        const res = await axios.get(`https://selfy-snap-1-7kn9.onrender.com/api/productdetail/singledetail/${id}`);
         const product = res.data.product;
         setForm({
           ...product,
@@ -33,8 +33,8 @@ const UpdateProductForm = () => {
           image: '',
           images: [],
         });
-        setPreviewImage(`https://selfy-snap-o6ka.onrender.com${product.image}`);
-        setPreviewGallery(product.images.map(img => `https://selfy-snap-o6ka.onrender.com${img}`));
+        setPreviewImage(`${product.image}`);
+        setPreviewGallery(product.images.map(img => `${img}`));
       } catch (err) {
         toast.error('Failed to load product');
       }
@@ -81,7 +81,7 @@ const UpdateProductForm = () => {
         }
       });
 
-      await axios.put(`https://selfy-snap-o6ka.onrender.com/api/productdetail/update/${id}`, formData, {
+      await axios.put(`https://selfy-snap-1-7kn9.onrender.com/api/productdetail/update/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

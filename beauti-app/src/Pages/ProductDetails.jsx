@@ -15,9 +15,9 @@ const ProductDetails = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await axios.get(`https://selfy-snap-o6ka.onrender.com/api/productdetail/singledetail/${id}`);
+                const res = await axios.get(`https://selfy-snap-1-7kn9.onrender.com/api/productdetail/singledetail/${id}`);
                 setProduct(res.data.product);
-                setSelectedImage(`https://selfy-snap-o6ka.onrender.com${res.data.product.images?.[0]}`);
+                setSelectedImage(`${res.data.product.images?.[0]}`);
             } catch (err) {
                 console.error("Failed to fetch product:", err);
                 setError('Failed to load product.');
@@ -50,10 +50,10 @@ const ProductDetails = () => {
                         {product.images?.slice(0, 4).map((img, index) => (
                             <img
                                 key={index}
-                                src={`https://selfy-snap-o6ka.onrender.com${img}`}
+                                src={img}
                                 alt={`Thumbnail ${index}`}
-                                onClick={() => setSelectedImage(`https://selfy-snap-o6ka.onrender.com${img}`)}
-                                className={`h-20 w-full object-contain cursor-pointer border p-1 rounded-lg transition duration-200 ${selectedImage === `https://selfy-snap-o6ka.onrender.com${img}`
+                                onClick={() => setSelectedImage(`${img}`)}
+                                className={`h-20 w-full object-contain cursor-pointer border p-1 rounded-lg transition duration-200 ${selectedImage === `${img}`
                                         ? 'border-blue-600 ring-2 ring-blue-300'
                                         : 'hover:border-blue-400'
                                     }`}

@@ -16,7 +16,7 @@ const Order = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const res = await axios.get(`https://selfy-snap-o6ka.onrender.com/api/orders/seller`, {
+                const res = await axios.get(`https://selfy-snap-1-7kn9.onrender.com/api/orders/seller`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setOrders(res.data);
@@ -47,7 +47,7 @@ const Order = () => {
 
     const handleStatusChange = async (orderId, newStatus) => {
         try {
-            await axios.put(`https://selfy-snap-o6ka.onrender.com/api/orders/admin/update/${orderId}`, {
+            await axios.put(`https://selfy-snap-1-7kn9.onrender.com/api/orders/admin/update/${orderId}`, {
                 status: newStatus,
             }, {
                 headers: { Authorization: `Bearer ${token}` },
@@ -80,7 +80,7 @@ const Order = () => {
                     {row.items.map((item, idx) => (
                         <div key={idx} className="flex items-center gap-2 mb-1">
                             <img
-                                src={`https://selfy-snap-o6ka.onrender.com${item.product.images[0]}`}
+                                src={`https://selfy-snap-1-7kn9.onrender.com${item.product.images[0]}`}
                                 alt={item.product.name}
                                 className="w-10 h-10 object-cover rounded"
                             />

@@ -3,17 +3,17 @@ const ProductDetail = require('../model/productDtails');
 // Create Product with seller reference
 exports.createProductDetail = async (req, res) => {
   try {
-    const sellerId = req.user.id; // Get seller ID from authenticated user
+    const sellerId = req.user.id;
     const body = req.body;
 
-    const image = req.files.find(f => f.fieldname === 'image')?.filename;
-    const images = req.files.filter(f => f.fieldname === 'images').map(f => f.filename);
+    const image = req.files.find(f => f.fieldname === 'image')?.path;
+    const images = req.files.filter(f => f.fieldname === 'images').map(f => f.path);
 
     const product = new ProductDetail({
       ...body,
-      seller: sellerId, // ✅ Attach seller
-      image: image ? `/uploads/${image}` : '',
-      images: images.map(name => `/uploads/${name}`),
+      seller: sellerId,
+      image: image || '',
+      images: images,
       bulletPoints: body.bulletPoints?.split(',') || [],
     });
 
@@ -24,7 +24,7 @@ exports.createProductDetail = async (req, res) => {
   }
 };
 
-// Get all products for user
+// Get all products for users
 exports.getAllProductUser = async (req, res) => {
   try {
     const products = await ProductDetail.find().sort({ createdAt: -1 });
@@ -77,13 +77,13 @@ exports.updateProductDetail = async (req, res) => {
     const product = await ProductDetail.findById(id);
     if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
 
-    const image = req.files.find(f => f.fieldname === 'image')?.filename;
-    const images = req.files.filter(f => f.fieldname === 'images').map(f => f.filename);
+    const image = req.files.find(f => f.fieldname === 'image')?.path;
+    const images = req.files.filter(f => f.fieldname === 'images').map(f => f.path);
 
     const updatedFields = {
       ...body,
-      image: image ? `/uploads/${image}` : product.image,
-      images: images.length > 0 ? images.map(name => `/uploads/${name}`) : product.images,
+      image: image || product.image,
+      images: images.length > 0 ? images : product.images,
       bulletPoints: body.bulletPoints ? body.bulletPoints.split(',') : product.bulletPoints,
     };
 
