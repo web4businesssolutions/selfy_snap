@@ -8,7 +8,7 @@ const Footer = () => {
   useEffect(() => {
     const fetchFooter = async () => {
       try {
-        const res = await axios.get("https://selfy-snap-1-7kn9.onrender.com/api/footer/all");
+        const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/footer/all");
         setFooter(res.data);
       } catch (error) {
         console.error("Failed to load footer:", error);
@@ -28,7 +28,7 @@ const Footer = () => {
           <div className="text-center md:text-left">
             {footer.logoUrl && (
               <img
-                src={`https://selfy-snap-1-7kn9.onrender.com/${footer.logoUrl}`}
+                src={`https://selfy-snap-o6ka.onrender.com/${footer.logoUrl}`}
                 alt="Logo"
                 className="h-20 mx-auto md:mx-0"
               />

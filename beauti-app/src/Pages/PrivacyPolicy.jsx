@@ -5,7 +5,7 @@ const PrivacyPolicy = () => {
     const [terms, setTerms] = useState([]);
 
     useEffect(() => {
-        axios.get("https://selfy-snap-1-7kn9.onrender.com/api/privacys/all")
+        axios.get("https://selfy-snap-o6ka.onrender.com/api/privacys/all")
             .then(res => setTerms(res.data));
     }, []);
 

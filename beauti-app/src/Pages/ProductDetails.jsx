@@ -15,7 +15,7 @@ const ProductDetails = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await axios.get(`https://selfy-snap-1-7kn9.onrender.com/api/productdetail/singledetail/${id}`);
+                const res = await axios.get(`https://selfy-snap-o6ka.onrender.com/api/productdetail/singledetail/${id}`);
                 setProduct(res.data.product);
                 setSelectedImage(`${res.data.product.images?.[0]}`);
             } catch (err) {

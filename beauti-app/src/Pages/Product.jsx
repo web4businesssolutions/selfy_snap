@@ -8,7 +8,7 @@
 //     useEffect(() => {
 //         const fetchProducts = async () => {
 //             try {
-//                 const res = await axios.get("https://selfy-snap-1-7kn9.onrender.com/api/products/all-products");
+//                 const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/products/all-products");
 //                 setProducts(res.data.products); // Ensure backend returns { products: [...] }
 //             } catch (error) {
 //                 console.error("Failed to fetch products:", error);
@@ -33,7 +33,7 @@
 //                         className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200"
 //                     >
 //                         <img
-//                             src={`https://selfy-snap-1-7kn9.onrender.com${images[0]}`}  // Example: /uploads/17508xxxxx.webp
+//                             src={`https://selfy-snap-o6ka.onrender.com${images[0]}`}  // Example: /uploads/17508xxxxx.webp
 //                             crossOrigin="anonymous"
 //                             alt="Product"
 //                         />
@@ -64,7 +64,7 @@ const Product = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get("https://selfy-snap-1-7kn9.onrender.com/api/products/all-products");
+                const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/products/all-products");
                 setProducts(res.data.products);
             } catch (error) {
                 console.error("Failed to fetch products:", error);
@@ -90,7 +90,7 @@ const Product = () => {
                     >
                         <div className="relative overflow-hidden">
                             <Link to={`/product/${_id}`}> <img
-                                src={`https://selfy-snap-1-7kn9.onrender.com${images[0]}`}
+                                src={`https://selfy-snap-o6ka.onrender.com${images[0]}`}
                                 alt={name}
                                 className="w-full h-40 object-cover transform group-hover:scale-105 transition-transform duration-300"
                             />

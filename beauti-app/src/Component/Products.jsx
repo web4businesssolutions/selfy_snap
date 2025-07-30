@@ -9,7 +9,7 @@ const Product = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get("https://selfy-snap-1-7kn9.onrender.com/api/products/all-products");
+                const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/products/all-products");
                 console.log("Fetched data:", res.data); // ✅ Check what is returned
                 console.log(res.data.products);
                 setProducts(res.data.products); // ✅ Use the correct array
@@ -41,7 +41,7 @@ const Product = () => {
         //                 {images.map((img, index) => (
         //                     <img
         //                         key={index}
-        //                         src={`https://selfy-snap-1-7kn9.onrender.com/uploads/${img}`}  // not img.url
+        //                         src={`https://selfy-snap-o6ka.onrender.com/uploads/${img}`}  // not img.url
         //                         alt={`${name}-${index}`}
         //                         className="w-full h-40 object-cover"
         //                         onError={(e) => {

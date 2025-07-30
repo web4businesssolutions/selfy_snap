@@ -7,7 +7,7 @@ const AdminTerms = () => {
   const [sections, setSections] = useState([]);
 
   const fetchTerms = async () => {
-    const res = await axios.get("https://selfy-snap-1-7kn9.onrender.com/api/shippings/all");
+    const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/shippings/all");
     setTerms(res.data);
   };
 
@@ -72,7 +72,7 @@ const AdminTerms = () => {
   const handleSubmit = async () => {
     for (const sec of sections) {
       if (sec.heading) {
-        await axios.post("https://selfy-snap-1-7kn9.onrender.com/api/shippings/add", {
+        await axios.post("https://selfy-snap-o6ka.onrender.com/api/shippings/add", {
           heading: sec.heading,
           content: sec.content,
           bulletPoints: sec.bulletPoints.filter(bp => bp.trim() !== ""),
@@ -96,7 +96,7 @@ const AdminTerms = () => {
 
   const handleUpdate = async () => {
     const section = sections[0]; // only one section is editable at a time
-    await axios.put(`https://selfy-snap-1-7kn9.onrender.com/api/shippings/update/${section.id}`, {
+    await axios.put(`https://selfy-snap-o6ka.onrender.com/api/shippings/update/${section.id}`, {
       heading: section.heading,
       content: section.content,
       bulletPoints: section.bulletPoints.filter(bp => bp.trim() !== ""),
@@ -106,7 +106,7 @@ const AdminTerms = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`https://selfy-snap-1-7kn9.onrender.com/api/shippings/delete/${id}`);
+    await axios.delete(`https://selfy-snap-o6ka.onrender.com/api/shippings/delete/${id}`);
     fetchTerms();
   };
 
