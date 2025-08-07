@@ -28,7 +28,7 @@ const AdminAbout = () => {
   const fetchAbout = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/about/all");
+      const res = await axios.get("http://localhost:4000/api/about/all");
       const data = res.data.data[0];
       setAbout(data);
       setAboutId(data._id);
@@ -43,7 +43,7 @@ const AdminAbout = () => {
         achievements: data.achievements || [],
       });
       if (data.image) {
-        setImagePreview(`https://selfy-snap-o6ka.onrender.com${data.image}`);
+        setImagePreview(`http://localhost:4000${data.image}`);
       }
     } catch (err) {
       console.error(err);
@@ -77,7 +77,7 @@ const AdminAbout = () => {
         value = form.achievements;
       }
 
-      await axios.put(`https://selfy-snap-o6ka.onrender.com/api/about/update/${aboutId}`, {
+      await axios.put(`http://localhost:4000/api/about/update/${aboutId}`, {
         [field]: value,
       });
 
@@ -124,7 +124,7 @@ const AdminAbout = () => {
 
     try {
       await axios.put(
-        `https://selfy-snap-o6ka.onrender.com/api/about/update/${aboutId}`,
+        `http://localhost:4000/api/about/update/${aboutId}`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

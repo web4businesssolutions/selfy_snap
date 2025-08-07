@@ -7,12 +7,12 @@ exports.getFooter = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: "Server Error" });
   }
-};
+}; 
 
 exports.createFooter = async (req, res) => {
   try {
     const data = JSON.parse(req.body.data);
-    if (req.file) data.logoUrl = `uploads/${req.file.filename}`;
+    if (req.file) data.logoUrl = req.file.path;
 
     const footer = new Footer(data);
     await footer.save();
@@ -25,7 +25,7 @@ exports.createFooter = async (req, res) => {
 exports.updateFooter = async (req, res) => {
   try {
     const data = JSON.parse(req.body.data);
-    if (req.file) data.logoUrl = `uploads/${req.file.filename}`;
+    if (req.file) data.logoUrl = req.file.path;
 
     const updated = await Footer.findByIdAndUpdate(req.params.id, data, {
       new: true

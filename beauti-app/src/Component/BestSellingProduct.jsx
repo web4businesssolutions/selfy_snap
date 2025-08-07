@@ -13,7 +13,7 @@ const BestSellingProductsCarousel = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/productdetail/alldetails");
+        const res = await axios.get("http://localhost:4000/api/productdetail/alldetails");
         const bestSelling = res.data.products?.slice(0, 10); // Customize this logic
         setProducts(bestSelling || []);
       } catch (error) {
@@ -53,7 +53,7 @@ const BestSellingProductsCarousel = () => {
 
       <Slider {...settings}>
         {products.map(({ _id, name, price, images = [], category }) => {
-          const imageUrl = images.length > 0 ? `https://selfy-snap-o6ka.onrender.com${images[0]}` : "/no-image.png";
+          const imageUrl = images.length > 0 ? `${images[0]}` : "/no-image.png";
 
           return (
             <div key={_id} className="p-2">
@@ -77,7 +77,7 @@ const BestSellingProductsCarousel = () => {
                 {/* Product Info + Buttons */}
                 <div className="flex flex-col justify-between flex-grow p-4">
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-900 truncate">{name}</h3>
+                    <h5 className="text-sm font-semibold text-gray-900 truncate">{name}</h5>
                     <p className="text-xs text-gray-500">{category || "Uncategorized"}</p>
                     <p className="text-green-600 text-xl font-bold mt-1">₹{price}</p>
                   </div>

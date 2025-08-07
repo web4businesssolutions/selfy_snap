@@ -5,7 +5,7 @@ const ShippingPolicy = () => {
     const [terms, setTerms] = useState([]);
 
     useEffect(() => {
-        axios.get("https://selfy-snap-o6ka.onrender.com/api/shippings/all")
+        axios.get("http://localhost:4000/api/shippings/all")
             .then(res => setTerms(res.data));
     }, []);
 

@@ -19,7 +19,7 @@ const AdminContactForm = () => {
   useEffect(() => {
     const fetchContact = async () => {
       try {
-        const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/contact/get");
+        const res = await axios.get("http://localhost:4000/api/contact/get");
         if (res.data.data) {
           setFormData(res.data.data);
           setContactId(res.data.data._id);
@@ -40,7 +40,7 @@ const AdminContactForm = () => {
   const handleUpdate = async () => {
     if (!contactId) return toast.error("No contact found");
     try {
-      await axios.put(`https://selfy-snap-o6ka.onrender.com/api/contact/update/${contactId}`, {
+      await axios.put(`http://localhost:4000/api/contact/update/${contactId}`, {
         [activeField]: modalValue,
       });
       toast.success(`${activeField} updated`);

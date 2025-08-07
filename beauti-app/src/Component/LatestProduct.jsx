@@ -13,7 +13,7 @@ const LatestProductsCarousel = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/productdetail/alldetails");
+                const res = await axios.get("http://localhost:4000/api/productdetail/alldetails");
                 setProducts(res.data.products || []);
             } catch (error) {
                 console.error("Failed to fetch products:", error);
@@ -53,7 +53,7 @@ const LatestProductsCarousel = () => {
 
             <Slider {...settings}>
                 {products.map(({ _id, name, price, images = [], category }) => {
-                    const imageUrl = images.length > 0 ? `https://selfy-snap-o6ka.onrender.com${images[0]}` : "/no-image.png";
+                    const imageUrl = images.length > 0 ? `${images[0]}` : "/no-image.png";
 
                     return (
                         <div key={_id} className="p-2">
@@ -70,14 +70,14 @@ const LatestProductsCarousel = () => {
                                     </Link>
 
                                     <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full shadow">
-                                        10% OFF
+                                        Latest Product
                                     </span>
                                 </div>
 
                                 {/* Product Info + Buttons */}
                                 <div className="flex flex-col justify-between flex-grow p-4">
                                     <div>
-                                        <h3 className="text-sm font-semibold text-gray-900 truncate">{name}</h3>
+                                        <h5 className="text-sm font-semibold text-gray-900 truncate">{name}</h5>
                                         <p className="text-xs text-gray-500">{category || "Uncategorized"}</p>
                                         <p className="text-blue-600 text-xl font-bold mt-1">₹{price}</p>
                                     </div>

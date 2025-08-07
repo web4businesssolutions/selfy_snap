@@ -8,8 +8,9 @@ const Footer = () => {
   useEffect(() => {
     const fetchFooter = async () => {
       try {
-        const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/footer/all");
+        const res = await axios.get("http://localhost:4000/api/footer/all");
         setFooter(res.data);
+        console.log(res.data)
       } catch (error) {
         console.error("Failed to load footer:", error);
       }
@@ -20,7 +21,7 @@ const Footer = () => {
   if (!footer) return null;
 
   return (
-    <footer className="bg-gray-900 text-white py-16">
+    <footer className="bg-gray-900 text-white py-6 mt-4">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Logo + Description + Social Links */}
@@ -28,7 +29,7 @@ const Footer = () => {
           <div className="text-center md:text-left">
             {footer.logoUrl && (
               <img
-                src={`https://selfy-snap-o6ka.onrender.com/${footer.logoUrl}`}
+                src={footer.logoUrl}
                 alt="Logo"
                 className="h-20 mx-auto md:mx-0"
               />
@@ -76,7 +77,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm text-gray-300 mb-12">
           {footer.quickLinks?.map((section, index) => (
             <div key={index}>
-              <h4 className="font-semibold text-white mb-3">{section.section}</h4>
+              <h4 className="font-semibold !text-pink-500 mb-3">{section.section}</h4>
               <ul className="space-y-2">
                 {section.links?.map((link, idx) => (
                   <li key={idx}>
@@ -94,9 +95,9 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} {footer?.copyrightText} | Designed by{" "}
             <a href="https://web4businesssolutions.com" className="!text-pink-500 hover:underline">Web4BusinessSolutions.com</a>
           </p>
-          <div className="flex justify-center md:justify-end gap-6 mt-4 md:mt-0">
+          <div className="flex justify-center md:justify-end gap-6 md:mt-0">
             {footer.bottomLinks?.map((item, i) => (
-              <Link key={i} className="text-white" to={item.path}>{item.label}</Link>
+              <Link key={i} className="!text-pink-500" to={item.path}>{item.label}</Link>
             ))}
           </div>
         </div>

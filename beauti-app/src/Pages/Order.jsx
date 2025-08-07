@@ -29,7 +29,7 @@ const Order = () => {
 
     const fetchOrders = async () => {
         try {
-            const res = await axios.get('https://selfy-snap-o6ka.onrender.com/api/orders/my', {
+            const res = await axios.get('http://localhost:4000/api/orders/my', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setOrders(res.data);
@@ -45,7 +45,7 @@ const Order = () => {
     const handlePlaceOrder = async () => {
         try {
             await axios.post(
-                'https://selfy-snap-o6ka.onrender.com/api/orders/place',
+                'http://localhost:4000/api/orders/place',
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );

@@ -7,7 +7,7 @@ const Contact = () => {
   useEffect(() => {
     const fetchContact = async () => {
       try {
-        const res = await axios.get('https://selfy-snap-o6ka.onrender.com/api/contact/get');
+        const res = await axios.get('http://localhost:4000/api/contact/get');
         setContactData(res.data.data);
       } catch (error) {
         console.error('Failed to fetch contact data:', error);

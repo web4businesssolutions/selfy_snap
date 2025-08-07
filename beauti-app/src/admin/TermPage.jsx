@@ -7,7 +7,7 @@ const AdminTerms = () => {
   const [sections, setSections] = useState([]);
 
   const fetchTerms = async () => {
-    const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/terms/all");
+    const res = await axios.get("http://localhost:4000/api/terms/all");
     setTerms(res.data);
   };
 
@@ -72,7 +72,7 @@ const AdminTerms = () => {
   const handleSubmit = async () => {
     for (const sec of sections) {
       if (sec.heading) {
-        await axios.post("https://selfy-snap-o6ka.onrender.com/api/terms/add", {
+        await axios.post("http://localhost:4000/api/terms/add", {
           heading: sec.heading,
           content: sec.content,
           bulletPoints: sec.bulletPoints.filter(bp => bp.trim() !== ""),
@@ -96,7 +96,7 @@ const AdminTerms = () => {
 
   const handleUpdate = async () => {
     const section = sections[0]; // only one section is editable at a time
-    await axios.put(`https://selfy-snap-o6ka.onrender.com/api/terms/update/${section.id}`, {
+    await axios.put(`http://localhost:4000/api/terms/update/${section.id}`, {
       heading: section.heading,
       content: section.content,
       bulletPoints: section.bulletPoints.filter(bp => bp.trim() !== ""),
@@ -106,7 +106,7 @@ const AdminTerms = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`https://selfy-snap-o6ka.onrender.com/api/terms/delete/${id}`);
+    await axios.delete(`http://localhost:4000/api/terms/delete/${id}`);
     fetchTerms();
   };
 

@@ -10,3 +10,4 @@ router.put("/update/:id", upload.single("logo"), updateFooter);
 router.delete("/delete/:id", deleteFooter);
 
 module.exports = router;
+ 
