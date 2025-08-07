@@ -5,7 +5,7 @@ const ReturnPolicy = () => {
     const [terms, setTerms] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/api/returns/all")
+        axios.get("https://selfy-snap-o6ka.onrender.com/api/returns/all")
             .then(res => setTerms(res.data));
     }, []);
 

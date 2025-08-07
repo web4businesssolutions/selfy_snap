@@ -9,7 +9,7 @@ const About = () => {
     useEffect(() => {
         const fetchAbout = async () => {
             try {
-                const res = await axios.get('http://localhost:4000/api/about/all');
+                const res = await axios.get('https://selfy-snap-o6ka.onrender.com/api/about/all');
                 setData(res.data.data[0]); // assuming only 1 document
             } catch (err) {
                 console.error('Failed to load about data:', err);
@@ -36,7 +36,7 @@ const About = () => {
                 <div className="my-8 flex flex-col md:flex-row items-center gap-8" data-aos="fade-up">
                     <div className="flex-shrink-0 w-full md:w-1/2">
                         <img
-                            src={`http://localhost:4000${data.image}`}
+                            src={`https://selfy-snap-o6ka.onrender.com${data.image}`}
                             alt="About Selfy Snap"
                             className="w-full rounded-lg shadow-2xl hover:scale-105 transition duration-300"
                         />

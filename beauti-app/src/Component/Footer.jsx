@@ -8,7 +8,7 @@ const Footer = () => {
   useEffect(() => {
     const fetchFooter = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/footer/all");
+        const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/footer/all");
         setFooter(res.data);
         console.log(res.data)
       } catch (error) {

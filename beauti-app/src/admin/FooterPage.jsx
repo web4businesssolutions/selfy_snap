@@ -13,7 +13,7 @@ const AdminFooter = () => {
   const [logo, setLogo] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/footer/all").then(res => {
+    axios.get("https://selfy-snap-o6ka.onrender.com/api/footer/all").then(res => {
       setFooter(res.data);
       setFormData(res.data || {});
     });
@@ -92,9 +92,9 @@ const AdminFooter = () => {
     if (logo) form.append("logo", logo);
 
     if (footer?._id) {
-      await axios.put(`http://localhost:4000/api/footer/update/${footer._id}`, form);
+      await axios.put(`https://selfy-snap-o6ka.onrender.com/api/footer/update/${footer._id}`, form);
     } else {
-      await axios.post("http://localhost:4000/api/footer/add", form);
+      await axios.post("https://selfy-snap-o6ka.onrender.com/api/footer/add", form);
     }
 
     alert("Saved Successfully");

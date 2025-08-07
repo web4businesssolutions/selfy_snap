@@ -13,7 +13,7 @@ const LatestProductsCarousel = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get("http://localhost:4000/api/productdetail/alldetails");
+                const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/productdetail/alldetails");
                 setProducts(res.data.products || []);
             } catch (error) {
                 console.error("Failed to fetch products:", error);

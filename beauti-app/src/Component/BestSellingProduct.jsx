@@ -13,7 +13,7 @@ const BestSellingProductsCarousel = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/productdetail/alldetails");
+        const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/productdetail/alldetails");
         const bestSelling = res.data.products?.slice(0, 10); // Customize this logic
         setProducts(bestSelling || []);
       } catch (error) {

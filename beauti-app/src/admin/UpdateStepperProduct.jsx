@@ -24,7 +24,7 @@ const UpdateProductForm = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/productdetail/singledetail/${id}`);
+        const res = await axios.get(`https://selfy-snap-o6ka.onrender.com/api/productdetail/singledetail/${id}`);
         const product = res.data.product;
         setForm({
           ...product,
@@ -81,7 +81,7 @@ const UpdateProductForm = () => {
         }
       });
 
-      await axios.put(`http://localhost:4000/api/productdetail/update/${id}`, formData, {
+      await axios.put(`https://selfy-snap-o6ka.onrender.com/api/productdetail/update/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
