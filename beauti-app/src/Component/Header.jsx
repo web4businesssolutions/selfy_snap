@@ -21,7 +21,7 @@ const Header = () => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) setUser(JSON.parse(storedUser));
 
-        axios.get('https://selfy-snap-o6ka.onrender.com/api/categories/all')
+        axios.get('https://selfy-snap1-mrf9.onrender.com/api/categories/all')
             .then(res => setCategories(res.data.categories || []))
             .catch(err => console.error("Failed to load categories", err));
     }, []);
@@ -175,3 +175,4 @@ const Header = () => {
 };
 
 export default Header;
+
