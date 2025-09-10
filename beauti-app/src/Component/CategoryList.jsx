@@ -8,7 +8,7 @@ const CategoryScroll = () => {
 
     const fetchCategories = async () => {
         try {
-            const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/categories/all");
+            const res = await axios.get("https://selfy-snap1-mrf9.onrender.com/api/categories/all");
             setCategories(res.data.categories);
         } catch (error) {
             console.error("Failed to fetch categories:", error);
