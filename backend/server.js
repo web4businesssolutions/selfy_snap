@@ -28,7 +28,7 @@ const app = express();
 
 // ✅ Enable CORS for frontend origin
 app.use(cors({
-      origin: 'https://selfy-snap-1-7kn9.onrender.com',
+      origin: 'https://selfy-snap-mlev.onrender.com',
     // origin: 'http://localhost:5173',
 
     credentials: true,
@@ -78,4 +78,5 @@ mongoose.connect(process.env.MONGO_URI)
         app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
     })
     .catch((err) => console.log(err));
+
 
