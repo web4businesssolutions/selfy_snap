@@ -152,7 +152,7 @@ const Product = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get("https://selfy-snap-o6ka.onrender.com/api/productdetail/alldetails");
+                const res = await axios.get("https://selfy-snap1-mrf9.onrender.com/api/productdetail/alldetails");
                 setProducts(res.data.products);
             } catch (error) {
                 console.error("Failed to fetch products:", error);
@@ -213,3 +213,4 @@ const Product = () => {
 };
 
 export default Product;
+
