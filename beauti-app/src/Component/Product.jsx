@@ -196,7 +196,7 @@ const Product = () => {
                 New Arrivals
             </h2>
 
-            {products.length === 0 ? (
+            {products?.length === 0 ? (
                 <div className="text-center py-20">
                     <p className="text-xl text-gray-600">No products found</p>
                     <p className="text-gray-500 mt-2">Check back later for new arrivals</p>
@@ -213,4 +213,5 @@ const Product = () => {
 };
 
 export default Product;
+
 
